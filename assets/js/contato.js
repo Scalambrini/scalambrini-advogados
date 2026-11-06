@@ -13,7 +13,10 @@
  *
  * Transferência internacional (art. 33, VIII, da LGPD): com a Formspree configurada, o envio
  * exige a caixa de autorização específica e em destaque; a data e a hora da autorização seguem
- * com a mensagem. Sem a Formspree configurada, a caixa fica oculta, pois não há transferência.
+ * com a mensagem. Sem a autorização marcada — ou se a caixa não existir no formulário —, nenhum
+ * dado é enviado à Formspree. Sem a Formspree configurada, a caixa fica oculta, pois não há
+ * transferência. O botão "Enviar" vem desativado no HTML e só é ativado por este script, para
+ * que o formulário não possa ser submetido sem as validações.
  */
 (function () {
   'use strict';
@@ -96,6 +99,8 @@
     var iniciado = false;
     var enviando = false;
     var consentimento = form.querySelector('[data-consentimento-formspree]');
+
+    if (botao) botao.disabled = false;
 
     if (consentimento && !FORMSPREE_ID) {
       // sem Formspree configurada não há transferência internacional: a autorização não se aplica
@@ -294,7 +299,13 @@
       mostrarStatus('erro', frag);
     }
 
+    function autorizado() {
+      var caixa = form.elements.consentimento_transferencia_internacional;
+      return !!(caixa && caixa.type === 'checkbox' && caixa.checked && !caixa.disabled);
+    }
+
     function enviarFormspree() {
+      if (!autorizado()) return; // salvaguarda: nunca envia à Formspree sem a autorização
       bloquear(true);
       ocultarStatus();
       var controle = typeof AbortController === 'function' ? new AbortController() : null;
@@ -331,6 +342,10 @@
       if (enviando) return;
       if (!validar(true)) {
         mostrarStatus('erro', T.corrija);
+        return;
+      }
+      if (FORMSPREE_ID && !autorizado()) {
+        mostrarStatus('erro', T.consentimento);
         return;
       }
       ocultarStatus();
