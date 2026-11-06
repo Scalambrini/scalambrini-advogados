@@ -23,7 +23,10 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261103">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/complementos.css?v=20261106">
+<script>document.documentElement.className += ' js';</script>
 <style>
 html{scroll-behavior:smooth}
 body{margin:0}
@@ -31,19 +34,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </style>
 </head>
 <body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <div id="inicio" style="background: #FFFFFF; color: #1F2328; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.7">
 
-<div style="background: #0D1322; color: #C9CFD8; font-size: 13px">
+<div class="barra-topo" style="background: #0D1322; color: #C9CFD8; font-size: 13px">
 <div style="max-width: 1200px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px">
-<span>São Paulo · Brasília</span>
-<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px"><a href="tel:+5511964056680" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">(11) 96405-6680</a><a href="mailto:contato@scalambrini.com" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">contato@scalambrini.com</a><a href="https://www.linkedin.com/in/marcelo-scalambrini-49469290" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">LinkedIn</a><span style="display: flex; align-items: center; gap: 6px; letter-spacing: 0.08em"><span aria-current="true" style="font-weight: 600; color: #FFFFFF">PT</span><span aria-hidden="true">|</span><a href="/en/" lang="en" aria-label="English version" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8">EN</a></span></span>
+<span class="so-desktop">São Paulo · Brasília</span>
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px"><a href="tel:+5511964056680" data-posicao="topo" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">(11) 96405-6680</a><a class="so-desktop" href="mailto:contato@scalambrini.com" data-posicao="topo" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">contato@scalambrini.com</a><a href="https://www.linkedin.com/in/marcelo-scalambrini-49469290" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8; text-decoration: none">LinkedIn</a><span style="display: flex; align-items: center; gap: 6px; letter-spacing: 0.08em"><span aria-current="true" style="font-weight: 600; color: #FFFFFF">PT</span><span aria-hidden="true">|</span><a href="/en/" lang="en" aria-label="English version" style="display: inline-flex; align-items: center; min-height: 32px; color: #C9CFD8">EN</a></span></span>
 </div>
 </div>
 
 <header style="background: #FFFFFF; border-bottom: 1px solid #E3E6EA">
 <div style="max-width: 1200px; margin: 0 auto; padding: 18px clamp(20px, 5vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 40px">
 <a href="#inicio" style="display: block; width: clamp(150px, 15vw, 184px); padding: 2px 0"><img src="/marca/logo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados" width="1010" height="401" style="display: block; width: 100%; height: auto"></a>
-<nav aria-label="Menu principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 30px">
+<button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button>
+<nav id="menu-principal" class="menu-principal" aria-label="Menu principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 30px">
 <a href="#escritorio" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">O Escritório</a>
 <a href="#areas" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Áreas de Atuação</a>
 <a href="#servicos" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Serviços</a>
@@ -54,7 +59,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 </header>
 
-<section aria-labelledby="titulo" style="background-color: #131A2C; background-image: linear-gradient(rgba(19, 26, 44, 0.8), rgba(19, 26, 44, 0.8)), url('https://images.unsplash.com/photo-1645918899630-85e2f3132a84?w=2000&q=75&auto=format&fit=crop'); background-size: cover; background-position: center 60%; color: #FFFFFF; border-top: 3px solid #B89359">
+<main id="conteudo" tabindex="-1">
+<section class="hero-inicio" aria-labelledby="titulo" style="background-color: #131A2C; background-image: linear-gradient(rgba(19, 26, 44, 0.8), rgba(19, 26, 44, 0.8)), url('https://images.unsplash.com/photo-1645918899630-85e2f3132a84?w=2000&q=75&auto=format&fit=crop'); background-size: cover; background-position: center 60%; color: #FFFFFF; border-top: 3px solid #B89359">
 <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px, 9vw, 128px) clamp(20px, 5vw, 48px); box-sizing: border-box; display: flex; flex-direction: column; gap: 26px">
 <h1 id="titulo" style="margin: 0; max-width: 17em; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(38px, 5vw, 64px); line-height: 1.12; text-wrap: balance">Assessoria jurídica empresarial completa.</h1>
 <p style="margin: 0; max-width: 38em; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.7; color: #D5DAE1">Atuação consultiva e contenciosa nas áreas tributária, aduaneira, previdenciária, cível e empresarial, para empresas, entidades de classe e pessoas físicas.</p>
@@ -132,7 +138,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <article style="display: flex; flex-direction: column; gap: 14px; padding-top: 28px; border-top: 1px solid #3B455A">
 <h3 style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 27px; line-height: 1.25">Adequação à Reforma Tributária</h3>
 <p style="margin: 0; font-size: 16px; line-height: 1.75; color: #D5DAE1">Assessoria especializada na adaptação das empresas ao novo sistema de tributação do consumo, com o IBS e a CBS: diagnóstico dos impactos sobre preços, contratos, cadeia de fornecedores e créditos, revisão das operações e acompanhamento de todo o período de transição. Para uma primeira estimativa, use a <a href="/calculadora/" style="color: #D2B07A; text-underline-offset: 3px">calculadora da transição IBS/CBS</a>.</p>
-<a href="#contato" style="display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; margin-top: auto; color: #FFFFFF; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none">Fale com o escritório →</a>
+<div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: auto">
+<a href="/reforma-tributaria/" style="display: inline-flex; align-items: center; min-height: 44px; color: #D2B07A; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none">Atuação na Reforma Tributária →</a>
+<a href="#contato" style="display: inline-flex; align-items: center; min-height: 44px; color: #FFFFFF; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none">Fale com o escritório →</a>
+</div>
 </article>
 <article style="display: flex; flex-direction: column; gap: 14px; padding-top: 28px; border-top: 1px solid #3B455A">
 <h3 style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 27px; line-height: 1.25">Recuperação e monetização de créditos tributários</h3>
@@ -148,12 +157,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); box-sizing: border-box">
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px 56px; padding: clamp(26px, 4vw, 52px); border: 1px solid #E3E6EA; border-top: 3px solid #B89359; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 30px rgba(19, 26, 44, 0.06)">
 <div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
-<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8A6A33">Ferramenta gratuita · Reforma Tributária</p>
+<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8A6A33">Simulador informativo — sem cadastro</p>
 <h2 id="t-calculadora" style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; color: #131A2C; text-wrap: balance">Calculadora da transição IBS/CBS</h2>
 <p style="margin: 0; max-width: 40em; font-size: 16px; line-height: 1.75; color: #3B455A">Simule, ano a ano entre 2026 e 2033, como a substituição de PIS, Cofins, IPI, ICMS e ISS pela CBS e pelo IBS afeta o preço, os créditos e a carga tributária de uma operação, inclusive no cenário de inclusão do IBS e da CBS na base do ICMS.</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px">
 <a href="/calculadora/" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0 28px; background: #131A2C; color: #FFFFFF; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Abrir a calculadora</a>
-<span style="font-size: 13px; color: #5A6270">Gratuita e sem cadastro</span>
+<a href="/reforma-tributaria/" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 600; color: #8A6A33; text-underline-offset: 3px">Reforma Tributária: atuação do escritório</a>
 </div>
 </div>
 <div style="flex: 0 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
@@ -197,26 +206,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <h2 id="t-contato" style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; color: #131A2C">Fale conosco</h2>
 <dl style="margin: 16px 0 0; display: flex; flex-direction: column; gap: 18px">
 <div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6270">Endereço</dt><dd style="margin: 0; font-size: 16px">Av. Eng. Luiz Carlos Berrini, 1748, conj. 1710<br>Cidade Monções · São Paulo/SP · CEP 04571-000</dd></div>
-<div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6270">Telefone e WhatsApp</dt><dd style="margin: 0; font-size: 16px"><a href="tel:+5511964056680" style="color: #1F2328">(11) 96405-6680</a></dd></div>
-<div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6270">E-mail</dt><dd style="margin: 0; font-size: 16px"><a href="mailto:contato@scalambrini.com" style="color: #1F2328">contato@scalambrini.com</a></dd></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6270">Telefone e WhatsApp</dt><dd style="margin: 0; font-size: 16px"><a href="tel:+5511964056680" data-posicao="contato" style="display: inline-flex; align-items: center; min-height: 32px; color: #1F2328">(11) 96405-6680</a></dd></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6270">E-mail</dt><dd style="margin: 0; font-size: 16px"><a href="mailto:contato@scalambrini.com" data-posicao="contato" style="display: inline-flex; align-items: center; min-height: 32px; color: #1F2328">contato@scalambrini.com</a></dd></div>
 </dl>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px">
-<a href="https://wa.me/5511964056680" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">WhatsApp</a>
+<a href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20escrit%C3%B3rio%20e%20gostaria%20de%20falar%20com%20a%20equipe." data-posicao="contato" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">WhatsApp</a>
 <a href="#agenda" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; border: 1px solid #131A2C; color: #131A2C; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Agendar reunião</a>
 </div>
 </div>
 
-<form id="form-contato" aria-label="Formulário de contato" style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 18px">
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-nome" style="font-size: 14px; font-weight: 500">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-email" style="font-size: 14px; font-weight: 500">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-telefone" style="font-size: 14px; font-weight: 500">Telefone</label><input id="f-telefone" name="telefone" type="tel" autocomplete="tel" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-area" style="font-size: 14px; font-weight: 500">Assunto</label><select id="f-area" name="area" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><option>Direito Tributário</option><option>Direito Cível e Empresarial</option><option>Direito Aduaneiro</option><option>Direito Previdenciário</option><option>Transação tributária e parcelamento</option><option>Adequação à Reforma Tributária</option><option>Recuperação de créditos tributários</option><option>Outro assunto</option></select></div>
+<form id="form-contato" class="form-contato" data-contato data-formulario="inicio" novalidate aria-label="Formulário de contato" style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div class="form-campos" style="display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 13px; color: #5A6270">Campos marcados com <span class="obrigatorio">*</span> são obrigatórios.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-nome" class="rotulo">Nome <span class="obrigatorio" aria-hidden="true">*</span></label><input id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="120" aria-describedby="erro-f-nome" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><p class="campo-erro" id="erro-f-nome" hidden></p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-empresa" class="rotulo">Empresa <span class="opcional">(opcional)</span></label><input id="f-empresa" name="empresa" type="text" autocomplete="organization" maxlength="160" aria-describedby="erro-f-empresa" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><p class="campo-erro" id="erro-f-empresa" hidden></p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-email" class="rotulo">E-mail profissional <span class="obrigatorio" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" aria-describedby="erro-f-email" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><p class="campo-erro" id="erro-f-email" hidden></p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-telefone" class="rotulo">Telefone <span class="opcional">(opcional)</span></label><input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" aria-describedby="erro-f-telefone" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><p class="campo-erro" id="erro-f-telefone" hidden></p></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-mensagem" style="font-size: 14px; font-weight: 500">Mensagem</label><textarea id="f-mensagem" name="mensagem" rows="5" style="width: 100%; box-sizing: border-box; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px; resize: vertical"></textarea></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-area" class="rotulo">Área de interesse <span class="obrigatorio" aria-hidden="true">*</span></label><select id="f-area" name="area" required aria-describedby="erro-f-area" style="width: 100%; box-sizing: border-box; min-height: 48px; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px"><option value="">Selecione</option><option>Direito Tributário</option><option>Direito Cível e Empresarial</option><option>Direito Aduaneiro</option><option>Direito Previdenciário</option><option>Transação tributária e parcelamento</option><option>Adequação à Reforma Tributária</option><option>Recuperação de créditos tributários</option><option>Outro assunto</option></select><p class="campo-erro" id="erro-f-area" hidden></p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="f-resumo" class="rotulo">Resumo do assunto <span class="opcional">(opcional)</span></label><textarea id="f-resumo" name="resumo" rows="4" maxlength="600" aria-describedby="aviso-f-resumo contador-f-resumo erro-f-resumo" style="width: 100%; box-sizing: border-box; padding: 11px 14px; background: #FFFFFF; color: #1F2328; border: 1px solid #B9C0CA; border-radius: 8px; font: inherit; font-size: 16px; resize: vertical"></textarea><p class="contador" id="contador-f-resumo">0 de 600 caracteres</p><p class="aviso-sigilo" id="aviso-f-resumo">Descreva o tema em linhas gerais. Não anexe nem transcreva documentos e não inclua informações sigilosas, como dados fiscais protegidos, dados de processos sob sigilo ou dados de terceiros.</p><p class="campo-erro" id="erro-f-resumo" hidden></p></div>
+<div class="isca" aria-hidden="true"><label for="f-gotcha">Não preencha este campo</label><input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px">
-<p style="flex: 1 1 260px; margin: 0; font-size: 13px; line-height: 1.6; color: #5A6270">Os dados enviados são usados apenas para responder a este contato, conforme a Política de Privacidade.</p>
-<button type="submit" style="min-height: 48px; padding: 0 30px; background: #B89359; color: #131A2C; border: 0; border-radius: 8px; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer">Enviar</button>
+<p style="flex: 1 1 260px; margin: 0; font-size: 13px; line-height: 1.6; color: #5A6270">Os dados informados são usados apenas para responder a este contato e, se for o caso, preparar uma proposta de serviços, conforme a <a href="/privacidade.html" style="color: #8A6A33">Política de Privacidade</a>.</p>
+<button type="submit" class="botao-enviar" style="min-height: 48px; padding: 0 30px; background: #B89359; color: #131A2C; border: 0; border-radius: 8px; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer">Enviar</button>
+</div>
+<p class="form-status" role="status" aria-live="polite" hidden></p>
+</div>
+<div class="form-sucesso" hidden>
+<h3>Mensagem enviada</h3>
+<p>Obrigado pelo contato. O escritório retornará pelo e-mail ou pelo telefone informado.</p>
+<p>Se preferir, fale também pelo <a href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20escrit%C3%B3rio%20e%20gostaria%20de%20falar%20com%20a%20equipe." data-posicao="formulario-sucesso" style="color: #8A6A33; font-weight: 600">WhatsApp</a>.</p>
 </div>
 </form>
 
@@ -227,11 +247,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div style="flex: 1 1 320px; min-width: 0; box-sizing: border-box; padding: clamp(28px, 3.5vw, 48px); display: flex; flex-direction: column; gap: 16px">
 <p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8A6A33">Agendamento online</p>
 <h3 style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.2; color: #131A2C">Agende uma reunião</h3>
-<p style="margin: 0; font-size: 16px; line-height: 1.75">Escolha o dia e o horário na agenda do escritório. A confirmação chega por e-mail, com o link da videoconferência ou o endereço para o atendimento presencial.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.75">Informe o assunto e os dias de sua preferência pelo WhatsApp ou por e-mail. O escritório confirma o horário por e-mail, com o link da videoconferência ou o endereço para o atendimento presencial.</p>
 <ul style="list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column">
 <li style="padding: 10px 0; border-top: 1px solid #D9DDE3; font-size: 15px"><b style="font-weight: 600">Duração:</b> 30 minutos</li>
 <li style="padding: 10px 0; border-top: 1px solid #D9DDE3; font-size: 15px"><b style="font-weight: 600">Formato:</b> Google Meet ou presencial em São Paulo</li>
-<li style="padding: 10px 0; border-top: 1px solid #D9DDE3; border-bottom: 1px solid #D9DDE3; font-size: 15px"><b style="font-weight: 600">Confirmação:</b> automática, por e-mail</li>
+<li style="padding: 10px 0; border-top: 1px solid #D9DDE3; border-bottom: 1px solid #D9DDE3; font-size: 15px"><b style="font-weight: 600">Confirmação:</b> pelo escritório, por e-mail</li>
 </ul>
 </div>
 <div style="flex: 999 1 520px; min-width: 0; box-sizing: border-box; min-height: 320px; padding: 24px; display: flex">
@@ -240,16 +260,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <p style="margin: 0; font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif; font-size: 22px; color: #131A2C">Escolha como prefere agendar</p>
 <p style="margin: 0; max-width: 28em; font-size: 15px; line-height: 1.6; color: #5A6270">Envie uma mensagem com o assunto e os dias de sua preferência. O escritório retorna com a confirmação do horário.</p>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
-<a href="https://wa.me/5511964056680?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20reuni%C3%A3o." style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Agendar pelo WhatsApp</a>
-<a href="mailto:contato@scalambrini.com?subject=Agendamento%20de%20reuni%C3%A3o" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; border: 1px solid #131A2C; color: #131A2C; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Agendar por e-mail</a>
+<a href="https://wa.me/5511964056680?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20reuni%C3%A3o." data-posicao="agenda" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Agendar pelo WhatsApp</a>
+<a href="mailto:contato@scalambrini.com?subject=Agendamento%20de%20reuni%C3%A3o" data-posicao="agenda" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 8px; border: 1px solid #131A2C; color: #131A2C; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase">Agendar por e-mail</a>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
+</main>
 
-<footer style="background: #131A2C; color: #C9CFD8">
+<footer class="rodape-site" style="background: #131A2C; color: #C9CFD8">
 <div style="max-width: 1200px; margin: 0 auto; padding: 52px clamp(20px, 5vw, 48px) 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 36px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px 56px">
 <p style="margin: 0; flex: 0 1 200px"><img src="/marca/logo-negativo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados" width="1010" height="401" style="display: block; width: 100%; height: auto"></p>
@@ -267,26 +288,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-top: 22px; border-top: 1px solid #2A3347; font-size: 12.5px; line-height: 1.6; color: #AEB7C4">
 <span style="flex: 1 1 480px; max-width: 72ch">Conteúdo de caráter informativo, nos termos do Provimento nº 205/2021 do Conselho Federal da OAB.</span>
-<span style="display: flex; flex-wrap: wrap; gap: 4px 20px"><a href="/apresentacao-institucional.pdf?v=20261103" target="_blank" rel="noopener" style="color: #AEB7C4">Apresentação institucional</a><a href="/calculadora/" style="color: #AEB7C4">Calculadora IBS/CBS</a><a href="/privacidade.html" style="color: #AEB7C4">Política de Privacidade</a><span>© 2026 Scalambrini e Saraiva Advogados</span></span>
+<span class="rodape-links" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px"><a href="/apresentacao-institucional.pdf?v=20261103" target="_blank" rel="noopener" style="color: #AEB7C4">Apresentação institucional</a><a href="/reforma-tributaria/" style="color: #AEB7C4">Reforma Tributária</a><a href="/calculadora/" style="color: #AEB7C4">Calculadora IBS/CBS</a><a href="/privacidade.html" style="color: #AEB7C4">Política de Privacidade</a><button type="button" class="preferencias-cookies" data-preferencias-cookies hidden>Preferências de cookies</button><span>© 2026 Scalambrini e Saraiva Advogados</span></span>
 </div>
 </div>
 </footer>
 
-<a href="https://wa.me/5511964056680" aria-label="Conversar pelo WhatsApp" style="position: fixed; right: 20px; bottom: 20px; z-index: 10; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; border-radius: 26px; box-shadow: 0 6px 18px rgba(19, 26, 44, 0.28)"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg>WhatsApp</a>
+<a class="whats-flutuante" href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20escrit%C3%B3rio%20e%20gostaria%20de%20falar%20com%20a%20equipe." data-posicao="flutuante" aria-label="Conversar pelo WhatsApp" style="position: fixed; right: 20px; bottom: 20px; z-index: 10; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; background: #131A2C; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; border-radius: 26px; box-shadow: 0 6px 18px rgba(19, 26, 44, 0.28)"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg>WhatsApp</a>
 
 </div>
 
-<script>
-(function () {
-  var f = document.getElementById('form-contato');
-  if (!f) return;
-  f.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var v = function (n) { return (f.elements[n] && f.elements[n].value || '').trim(); };
-    var corpo = 'Nome: ' + v('nome') + '\nE-mail: ' + v('email') + '\nTelefone: ' + v('telefone') + '\nAssunto: ' + v('area') + '\n\n' + v('mensagem');
-    window.location.href = 'mailto:contato@scalambrini.com?subject=' + encodeURIComponent('Contato pelo site — ' + v('area')) + '&body=' + encodeURIComponent(corpo);
-  });
-})();
-</script>
+<script src="/assets/js/site.js?v=20261106" defer></script>
+<script src="/assets/js/medicao.js?v=20261106" defer></script>
+<script src="/assets/js/contato.js?v=20261106" defer></script>
 </body>
 </html>
