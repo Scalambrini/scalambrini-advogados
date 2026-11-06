@@ -1,11 +1,12 @@
 /* Formulário de contato — Scalambrini e Saraiva Advogados
  *
  * CONFIGURAÇÃO
- * Preencha FORMSPREE_ID com o identificador do formulário criado no painel da Formspree
- * (a parte final do endereço exibido na aba "Integration": https://formspree.io/f/IDENTIFICADOR).
- * O identificador não é senha: ele aparece no código de qualquer formulário publicado.
+ * FORMSPREE_ID é o identificador do formulário criado no painel da Formspree
+ * (a parte final do endereço https://formspree.io/f/IDENTIFICADOR). Formulário do escritório:
+ * https://formspree.io/f/mvkknzno. O identificador não é senha: ele aparece no código de
+ * qualquer formulário publicado.
  *
- * Enquanto FORMSPREE_ID estiver vazio, o formulário continua funcionando como antes:
+ * Se FORMSPREE_ID for esvaziado, o formulário volta a funcionar como antes:
  * valida os campos e abre o programa de e-mail do visitante com a mensagem pronta.
  *
  * Proteções: campo-isca "_gotcha" (envios que o preenchem são descartados pela Formspree)
@@ -21,7 +22,7 @@
 (function () {
   'use strict';
 
-  var FORMSPREE_ID = '';
+  var FORMSPREE_ID = 'mvkknzno';
 
   var EMAIL_ESCRITORIO = 'contato@scalambrini.com';
   var WHATSAPP = '5511964056680';
