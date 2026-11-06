@@ -9,8 +9,13 @@
 <meta property="og:title" content="Calculadora da transição IBS/CBS (2026–2033)">
 <meta property="og:description" content="Preço, débitos, créditos e carga de uma operação, ano a ano, da fase de teste à vigência plena do IBS e da CBS.">
 <meta property="og:image" content="https://scalambrini.com/marca/compartilhamento.png?v=20261103">
+<meta property="og:url" content="https://scalambrini.com/calculadora/">
+<meta property="og:locale" content="pt_BR">
 <meta name="theme-color" content="#131A2C">
+<link rel="canonical" href="https://scalambrini.com/calculadora/">
+<link rel="icon" href="/favicon.ico?v=20261103" sizes="any">
 <link rel="icon" href="/favicon.svg?v=20261103" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261103">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
@@ -138,6 +143,20 @@ td.neg{color:var(--brick)}
 .metodo table{min-width:620px;font-size:13px}
 .metodo td,.metodo th{text-align:left}
 
+/* contato */
+.contato-calc{padding-top:8px;padding-bottom:48px}
+.contato-calc .caixa{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px;padding:clamp(20px,3vw,32px);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:14px;background:var(--soft)}
+.contato-calc h2{margin:0;font-size:clamp(20px,2.4vw,26px);font-weight:600;color:var(--navy);line-height:1.25}
+.contato-calc p{margin:8px 0 0;max-width:40em;font-size:15px;line-height:1.65}
+.contato-calc .botoes{display:flex;flex-wrap:wrap;gap:10px}
+.contato-calc .botoes a{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:9px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.contato-calc .b-prim{background:var(--navy);color:#fff;border:1px solid var(--navy)}
+.contato-calc .b-sec{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.rodape .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.rodape .links a{display:inline-flex;align-items:center;min-height:32px;color:#AEB7C4}
+.preferencias-cookies{min-height:32px;padding:0;background:none;border:0;color:#AEB7C4;font:inherit;text-decoration:underline;cursor:pointer}
+.preferencias-cookies[hidden]{display:none}
+
 /* rodapé */
 .rodape{background:var(--navy2);color:#AEB7C4;font-size:13px;line-height:1.6}
 .rodape .wrap{padding-top:28px;padding-bottom:32px;display:grid;gap:10px}
@@ -151,7 +170,7 @@ td.neg{color:var(--brick)}
   .seg label{font-size:13px;padding:10px}
 }
 @media print{
-  .topo,.presets,.acoes,.hero .atualizado{display:none}
+  .topo,.presets,.acoes,.hero .atualizado,.contato-calc{display:none}
   .hero{background:#fff;color:var(--ink);border:0}
   .hero .lead{color:var(--muted)}
   .grade{grid-template-columns:1fr}
@@ -377,10 +396,24 @@ td.neg{color:var(--brick)}
   </details>
 </section>
 
+<section class="wrap contato-calc" aria-labelledby="t-contato-calc">
+  <div class="caixa">
+    <div>
+      <h2 id="t-contato-calc">Análise da sua operação</h2>
+      <p>A simulação é informativa. A avaliação dos efeitos da transição sobre preços, contratos e créditos de uma operação concreta depende do exame da legislação e dos documentos aplicáveis a cada caso.</p>
+    </div>
+    <div class="botoes">
+      <a class="b-prim" href="/reforma-tributaria/#contato">Fale com o escritório</a>
+      <a class="b-sec" href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Usei%20a%20calculadora%20da%20transi%C3%A7%C3%A3o%20IBS%2FCBS%20no%20site%20e%20gostaria%20de%20falar%20com%20o%20escrit%C3%B3rio." data-posicao="calculadora">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
 <footer class="rodape">
   <div class="wrap">
     <span><strong>Scalambrini e Saraiva Advogados</strong> · São Paulo · Brasília · <a href="https://scalambrini.com/">scalambrini.com</a></span>
     <span>Simulação de caráter informativo, construída sobre premissas simplificadas e alíquotas de referência ainda não definitivas. Não constitui parecer nem substitui a análise das operações e da legislação aplicável a cada caso.</span>
+    <span class="links"><a href="/reforma-tributaria/">Reforma Tributária</a><a href="/privacidade.html">Política de Privacidade</a><button type="button" class="preferencias-cookies" data-preferencias-cookies hidden>Preferências de cookies</button></span>
   </div>
 </footer>
 
@@ -734,5 +767,6 @@ td.neg{color:var(--brick)}
   atualizar();
 })();
 </script>
+<script src="/assets/js/medicao.js?v=20261106" defer></script>
 </body>
 </html>
