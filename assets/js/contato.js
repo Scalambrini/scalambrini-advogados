@@ -10,6 +10,10 @@
  *
  * Proteções: campo-isca "_gotcha" (envios que o preenchem são descartados pela Formspree)
  * e os filtros automáticos da própria Formspree. Não há bloqueio por tempo de preenchimento.
+ *
+ * Transferência internacional (art. 33, VIII, da LGPD): com a Formspree configurada, o envio
+ * exige a caixa de autorização específica e em destaque; a data e a hora da autorização seguem
+ * com a mensagem. Sem a Formspree configurada, a caixa fica oculta, pois não há transferência.
  */
 (function () {
   'use strict';
@@ -28,6 +32,7 @@
     telefone: 'Please enter the phone number with area code, or leave it blank.',
     area: 'Please select an area of interest.',
     resumo: 'Please keep the summary within 600 characters.',
+    consentimento: 'To send this form, please tick the authorization box, or contact the firm by WhatsApp or email.',
     corrija: 'Please review the highlighted fields.',
     enviando: 'Sending…',
     caracteres: function (n) { return n + ' of 600 characters'; },
@@ -47,6 +52,7 @@
     telefone: 'Informe o telefone com DDD ou deixe o campo em branco.',
     area: 'Selecione a área de interesse.',
     resumo: 'O resumo deve ter até 600 caracteres.',
+    consentimento: 'Para enviar pelo formulário, marque a autorização. Se preferir, fale com o escritório pelo WhatsApp ou por e-mail.',
     corrija: 'Revise os campos destacados.',
     enviando: 'Enviando…',
     caracteres: function (n) { return n + ' de 600 caracteres'; },
@@ -89,6 +95,16 @@
     var contador = form.querySelector('.contador');
     var iniciado = false;
     var enviando = false;
+    var consentimento = form.querySelector('[data-consentimento-formspree]');
+
+    if (consentimento && !FORMSPREE_ID) {
+      // sem Formspree configurada não há transferência internacional: a autorização não se aplica
+      consentimento.hidden = true;
+      Array.prototype.forEach.call(consentimento.querySelectorAll('input'), function (el) {
+        el.required = false;
+        el.disabled = true;
+      });
+    }
 
     function valor(n) {
       var el = form.elements[n];
@@ -100,6 +116,7 @@
     }
 
     function mensagem(el) {
+      if (el.type === 'checkbox') return el.required && !el.checked ? T.consentimento : '';
       var v = (el.value || '').trim();
       if (el.name === 'telefone') {
         if (!v) return '';
@@ -128,7 +145,7 @@
 
     function validaveis() {
       return Array.prototype.filter.call(form.elements, function (el) {
-        return el.name && el.name.charAt(0) !== '_' && el.type !== 'hidden' && el.type !== 'submit' && !el.closest('.isca');
+        return el.name && el.name.charAt(0) !== '_' && el.type !== 'hidden' && el.type !== 'submit' && !el.disabled && !el.closest('.isca');
       });
     }
 
@@ -145,9 +162,9 @@
 
     validaveis().forEach(function (el) {
       el.addEventListener('blur', function () {
-        if (el.value || el.getAttribute('aria-invalid')) marcar(el, mensagem(el));
+        if ((el.type !== 'checkbox' && el.value) || el.getAttribute('aria-invalid')) marcar(el, mensagem(el));
       });
-      el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', function () {
+      el.addEventListener(el.tagName === 'SELECT' || el.type === 'checkbox' ? 'change' : 'input', function () {
         if (el.getAttribute('aria-invalid')) marcar(el, mensagem(el));
         if (!iniciado) {
           iniciado = true;
@@ -199,6 +216,10 @@
       definirOculto('gclid', ids.gclid);
       definirOculto('gbraid', ids.gbraid);
       definirOculto('wbraid', ids.wbraid);
+      var caixa = form.elements.consentimento_transferencia_internacional;
+      definirOculto('consentimento_transferencia_registro', caixa && caixa.checked && !caixa.disabled
+        ? new Date().toISOString() + ' · texto do formulário de 06/11/2026 (art. 33, VIII, LGPD)'
+        : '');
       var assunto = T.assunto + ' — ' + (valor('area') || '-') + (valor('empresa') ? ' — ' + valor('empresa') : '');
       definirOculto('_subject', assunto);
     }
