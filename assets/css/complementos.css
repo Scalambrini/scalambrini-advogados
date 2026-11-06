@@ -1,0 +1,59 @@
+/* Complementos de navegação, contato e formulário — Scalambrini e Saraiva Advogados
+   Mantém a identidade visual: azul-marinho #131A2C, dourado #B89359 / #8A6A33, Poppins. */
+
+/* Acessibilidade */
+.pular{position:absolute;left:12px;top:-80px;z-index:100;padding:12px 18px;background:#131A2C;color:#FFFFFF;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.pular:focus{top:12px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+main:focus{outline:none}
+
+/* Menu compacto no celular */
+.menu-botao{display:none;align-items:center;gap:10px;min-height:44px;padding:0 16px;background:#FFFFFF;color:#131A2C;border:1px solid #131A2C;border-radius:8px;font:inherit;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.menu-botao .barras{display:inline-flex;flex-direction:column;gap:4px}
+.menu-botao .barras i{display:block;width:16px;height:2px;background:currentColor;border-radius:1px}
+.menu-botao[aria-expanded="true"] .barras i:nth-child(2){opacity:0}
+@media (max-width:760px){
+  .menu-botao{display:inline-flex}
+  .js .menu-principal{display:none!important}
+  .js .menu-principal.aberto{display:flex!important;flex-direction:column;align-items:stretch!important;width:100%;gap:0!important;margin-top:6px;border-top:1px solid #E3E6EA}
+  .js .menu-principal.aberto a{min-height:50px!important;border-bottom:1px solid #E3E6EA}
+  .barra-topo .so-desktop{display:none!important}
+  .hero-inicio{background-image:linear-gradient(rgba(19,26,44,.8),rgba(19,26,44,.8)),url('https://images.unsplash.com/photo-1645918899630-85e2f3132a84?w=900&q=70&auto=format&fit=crop')!important}
+}
+
+/* Botão flutuante do WhatsApp: contorno dourado para continuar visível sobre as faixas azul-marinho */
+.whats-flutuante{border:1px solid #B89359!important}
+.whats-flutuante:hover{background:#0D1322!important}
+@media (max-width:600px){
+  .whats-flutuante{right:14px!important;bottom:14px!important;min-height:50px!important;padding:0 18px!important}
+  .rodape-site{padding-bottom:76px}
+}
+
+/* Rodapé: alvos de toque maiores */
+.rodape-links a,.rodape-links .preferencias-cookies{display:inline-flex;align-items:center;min-height:32px}
+.preferencias-cookies{padding:0;background:none;border:0;color:#AEB7C4;font:inherit;font-size:inherit;text-decoration:underline;cursor:pointer}
+.preferencias-cookies[hidden]{display:none!important}
+
+/* Formulário */
+.form-campos[hidden]{display:none!important}
+.form-contato .rotulo{font-size:14px;font-weight:500}
+.form-contato .opcional{font-weight:400;color:#5A6270;font-size:13px}
+.form-contato .obrigatorio{color:#8A6A33}
+.form-contato input,.form-contato select,.form-contato textarea{transition:border-color .15s}
+.form-contato [aria-invalid="true"]{border-color:#B4432F!important;box-shadow:0 0 0 1px #B4432F}
+.campo-erro{margin:0;font-size:13px;line-height:1.5;color:#B4432F}
+.campo-erro[hidden]{display:none}
+.contador{margin:0;font-size:12px;color:#5A6270;text-align:right}
+.aviso-sigilo{margin:0;font-size:13px;line-height:1.6;color:#5A6270}
+.isca{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.botao-enviar[disabled]{opacity:.7;cursor:progress}
+.form-status{margin:0;padding:14px 16px;border-radius:8px;font-size:14px;line-height:1.6}
+.form-status[hidden]{display:none}
+.form-status.erro{background:#FBEDEA;border:1px solid #E7B9AF;color:#6E2416}
+.form-status.info{background:#F5F6F8;border:1px solid #D9DDE3;color:#1F2328}
+.form-status a{color:inherit;font-weight:600}
+.form-sucesso{display:flex;flex-direction:column;gap:12px;padding:clamp(22px,3vw,32px);background:#F5F6F8;border:1px solid #E3E6EA;border-top:3px solid #B89359;border-radius:12px}
+.form-sucesso[hidden]{display:none}
+.form-sucesso h3{margin:0;font-weight:600;font-size:22px;line-height:1.3;color:#131A2C}
+.form-sucesso h3:focus{outline:none}
+.form-sucesso p{margin:0;font-size:15px;line-height:1.7}
