@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/complementos.css?v=20261106">
+<link rel="stylesheet" href="/assets/css/complementos.css?v=20261109">
 <script>document.documentElement.className += ' js';</script>
 <style>
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -53,7 +53,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .rt .btn-ouro{background:#B89359;color:#131A2C}
 .rt .btn-contorno{border:1px solid #FFFFFF;color:#FFFFFF}
 .rt .btn-azul{background:#131A2C;color:#FFFFFF}
-.rt .btn-claro{border:1px solid #131A2C;color:#131A2C;background:#FFFFFF}
 .rt .hero .nota{color:#AEB7C4}
 
 /* cronograma */
@@ -76,9 +75,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .rt .lista li{padding:20px 0 20px 26px;border-top:1px solid #3B455A;font-size:16px;line-height:1.7;color:#D5DAE1;position:relative}
 .rt .lista li::before{content:"";position:absolute;left:0;top:31px;width:10px;height:10px;background:#B89359;border-radius:2px}
 
-/* calculadora */
-.rt .calc{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 48px;padding:clamp(26px,4vw,48px);border:1px solid #E3E6EA;border-top:3px solid #B89359;border-radius:12px;box-shadow:0 10px 30px rgba(19,26,44,.06)}
-.rt .calc > div{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:14px}
+/* simulador incorporado (a mesma página continua disponível em /calculadora/) */
+.rt .simulador-quadro{margin-top:32px}
+.rt .simulador-quadro iframe{display:block;width:100%;height:2200px;border:0;background:transparent}
+.rt .simulador-quadro iframe[hidden],.rt .simulador-abrir[hidden]{display:none}
+.rt .simulador-abrir{border:0;font-family:inherit;cursor:pointer}
+.rt .simulador-rodape{margin-top:18px}
+.rt .simulador-rodape a{color:#8A6A33;font-weight:600;text-underline-offset:3px}
+@media (max-width:979px){.rt .simulador-quadro iframe{height:3500px}}
 
 /* experiência */
 .rt .perfil{display:flex;flex-wrap:wrap;gap:32px 72px;margin-top:36px}
@@ -124,7 +128,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <a href="#transicao" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">A transição</a>
 <a href="#impactos" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Pontos de atenção</a>
 <a href="#atuacao" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Atuação</a>
-<a href="/calculadora/" style="display: inline-flex; align-items: center; min-height: 44px; color: #8A6A33; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase">Calculadora</a>
+<a href="#simulador" style="display: inline-flex; align-items: center; min-height: 44px; color: #8A6A33; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase">Simulador</a>
 <a href="/" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">O Escritório</a>
 <a href="#contato" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Contato</a>
 </nav>
@@ -141,6 +145,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div class="acoes">
 <a class="btn btn-ouro" href="#contato">Fale com o escritório</a>
 <a class="btn btn-contorno" href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20Reforma%20Tribut%C3%A1ria%20do%20site%20e%20gostaria%20de%20falar%20com%20o%20escrit%C3%B3rio." data-posicao="reforma-topo">WhatsApp</a>
+<a class="btn btn-contorno" href="#simulador">Simulador IBS e CBS</a>
 </div>
 <p class="nota">Reuniões presenciais em São Paulo ou por videoconferência.</p>
 </div>
@@ -199,7 +204,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <ul class="lista">
 <li>Diagnóstico dos efeitos da transição sobre operações, preços e créditos, com simulações por período.</li>
-<li>Revisão de contratos e de cláusulas de preço, reajuste e repasse de tributos, em atuação conjunta com o núcleo Cível e Empresarial.</li>
+<li>Revisão de contratos e de cláusulas de preço, reajuste e repasse de tributos, em atuação conjunta com o núcleo Cível e Societário.</li>
 <li>Mapeamento e documentação de saldos credores de PIS, Cofins e ICMS, com vistas ao aproveitamento previsto nas regras de transição.</li>
 <li>Análise de regimes diferenciados e específicos e dos efeitos da reforma sobre benefícios fiscais de ICMS em vigor.</li>
 <li>Acompanhamento da regulamentação do IBS e da CBS e dos atos das administrações tributárias.</li>
@@ -211,16 +216,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 </section>
 
-<section class="secao" aria-labelledby="t-calculadora">
+<section id="simulador" class="secao" aria-labelledby="t-simulador">
 <div class="wrap">
-<div class="calc">
-<div>
+<div class="cabeca">
 <p class="kicker">Simulador informativo — sem cadastro</p>
-<h2 id="t-calculadora">Calculadora da transição IBS/CBS</h2>
-<p class="texto" style="font-size: 16px; color: #3B455A">Simule, ano a ano entre 2026 e 2033, os efeitos da substituição de PIS, Cofins, IPI, ICMS e ISS pela CBS e pelo IBS sobre o preço, os créditos e a carga tributária de uma operação. Os resultados são estimativas de caráter informativo.</p>
+<h2 id="t-simulador">Simulador da Reforma Tributária — IBS e CBS</h2>
+<p class="texto">Simule, ano a ano entre 2026 e 2033, os efeitos da substituição de PIS, Cofins, IPI, ICMS e ISS pela CBS e pelo IBS sobre o preço, os créditos e a carga tributária de uma operação. Os resultados são estimativas de caráter informativo.</p>
 </div>
-<a class="btn btn-azul" href="/calculadora/">Abrir a calculadora</a>
+<div class="simulador-quadro">
+<button type="button" class="btn btn-azul simulador-abrir" aria-expanded="false" aria-controls="quadro-simulador" hidden>Usar o simulador nesta página</button>
+<iframe id="quadro-simulador" data-src="/calculadora/?incorporado=1" title="Simulador da Reforma Tributária — IBS e CBS" allow="clipboard-write"></iframe>
+<noscript><p class="nota">Para usar o simulador, ative o JavaScript do navegador.</p></noscript>
 </div>
+<p class="nota simulador-rodape">A simulação não substitui a análise da operação e da legislação aplicável a cada caso. <a href="/calculadora/">Abrir o simulador em página inteira</a> · <a href="#contato">Fale com o escritório sobre a sua operação</a></p>
 </div>
 </section>
 
@@ -272,7 +280,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div class="campo"><label for="r-email" class="rotulo">E-mail profissional <span class="obrigatorio" aria-hidden="true">*</span></label><input class="entrada" id="r-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" aria-describedby="erro-r-email"><p class="campo-erro" id="erro-r-email" hidden></p></div>
 <div class="campo"><label for="r-telefone" class="rotulo">Telefone <span class="opcional">(opcional)</span></label><input class="entrada" id="r-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" aria-describedby="erro-r-telefone"><p class="campo-erro" id="erro-r-telefone" hidden></p></div>
 </div>
-<div class="campo"><label for="r-area" class="rotulo">Área de interesse <span class="obrigatorio" aria-hidden="true">*</span></label><select class="entrada" id="r-area" name="area" required aria-describedby="erro-r-area"><option value="">Selecione</option><option selected>Adequação à Reforma Tributária</option><option>Revisão de contratos na transição</option><option>Créditos tributários e saldos credores</option><option>Direito Tributário — outros temas</option><option>Direito Cível e Empresarial</option><option>Outro assunto</option></select><p class="campo-erro" id="erro-r-area" hidden></p></div>
+<div class="campo"><label for="r-area" class="rotulo">Área de interesse <span class="obrigatorio" aria-hidden="true">*</span></label><select class="entrada" id="r-area" name="area" required aria-describedby="erro-r-area"><option value="">Selecione</option><option selected>Adequação à Reforma Tributária</option><option>Revisão de contratos na transição</option><option>Créditos tributários e saldos credores</option><option>Direito Tributário — outros temas</option><option>Direito Cível e Societário</option><option>Outro assunto</option></select><p class="campo-erro" id="erro-r-area" hidden></p></div>
 <div class="campo"><label for="r-resumo" class="rotulo">Resumo do assunto <span class="opcional">(opcional)</span></label><textarea class="entrada" id="r-resumo" name="resumo" rows="4" maxlength="600" aria-describedby="aviso-r-resumo contador-r-resumo erro-r-resumo"></textarea><p class="contador" id="contador-r-resumo">0 de 600 caracteres</p><p class="aviso-sigilo" id="aviso-r-resumo">Descreva o tema em linhas gerais. Não anexe nem transcreva documentos e não inclua informações sigilosas, como dados fiscais protegidos, dados de processos sob sigilo ou dados de terceiros.</p><p class="campo-erro" id="erro-r-resumo" hidden></p></div>
 <div class="consentimento-transferencia" data-consentimento-formspree><label for="r-consentimento" class="caixa-consentimento"><input id="r-consentimento" name="consentimento_transferencia_internacional" type="checkbox" value="sim" required aria-describedby="erro-r-consentimento"><span>Autorizo o envio destes dados à Formspree, Inc., nos Estados Unidos, serviço que recebe o formulário e o encaminha ao escritório (transferência internacional de dados, art. 33, VIII, da LGPD). Sem esta autorização, o formulário não é enviado; o contato pode ser feito pelo WhatsApp ou por e-mail, canais sujeitos às condições dos respectivos serviços.</span></label><p class="campo-erro" id="erro-r-consentimento" hidden></p></div>
 <div class="isca" aria-hidden="true"><label for="r-gotcha">Não preencha este campo</label><input id="r-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
@@ -312,7 +320,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; padding-top: 22px; border-top: 1px solid #2A3347; font-size: 12.5px; line-height: 1.6; color: #AEB7C4">
 <span style="flex: 1 1 480px; max-width: 72ch">Conteúdo de caráter informativo, nos termos do Provimento nº 205/2021 do Conselho Federal da OAB. As informações desta página não constituem parecer e não substituem a análise de cada caso.</span>
-<span class="rodape-links" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px"><a href="/" style="color: #AEB7C4">Página inicial</a><a href="/calculadora/" style="color: #AEB7C4">Calculadora IBS/CBS</a><a href="/privacidade.html" style="color: #AEB7C4">Política de Privacidade</a><button type="button" class="preferencias-cookies" data-preferencias-cookies hidden>Preferências de cookies</button><span>© 2026 Scalambrini e Saraiva Advogados</span></span>
+<span class="rodape-links" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px"><a href="/" style="color: #AEB7C4">Página inicial</a><a href="/apresentacao-institucional.pdf?v=20261109" target="_blank" rel="noopener" style="color: #AEB7C4">Apresentação institucional</a><a href="/calculadora/" style="color: #AEB7C4">Simulador IBS e CBS</a><a href="/privacidade.html" style="color: #AEB7C4">Política de Privacidade</a><button type="button" class="preferencias-cookies" data-preferencias-cookies hidden>Preferências de cookies</button><span>© 2026 Scalambrini e Saraiva Advogados</span></span>
 </div>
 </div>
 </footer>
@@ -321,8 +329,48 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 </div>
 
+<script>
+/* Simulador incorporado: carrega o quadro quando ele se aproxima da tela (no celular, só ao toque no botão)
+   e ajusta a altura do quadro à informada pelo simulador (somente mensagens da mesma origem). */
+(function () {
+  var quadro = document.getElementById('quadro-simulador');
+  if (!quadro) return;
+  var botao = document.querySelector('.simulador-abrir');
+
+  function carregar() {
+    if (!quadro.getAttribute('src')) quadro.setAttribute('src', quadro.getAttribute('data-src'));
+  }
+
+  var celular = window.matchMedia && window.matchMedia('(max-width: 979px)').matches;
+  if (celular && botao) {
+    quadro.hidden = true;
+    botao.hidden = false;
+    botao.addEventListener('click', function () {
+      quadro.hidden = false;
+      botao.hidden = true;
+      botao.setAttribute('aria-expanded', 'true');
+      carregar();
+    });
+  } else if (typeof IntersectionObserver === 'function') {
+    var obs = new IntersectionObserver(function (itens) {
+      if (itens.some(function (i) { return i.isIntersecting; })) { carregar(); obs.disconnect(); }
+    }, { rootMargin: '800px 0px' });
+    obs.observe(quadro);
+  } else {
+    carregar();
+  }
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== window.location.origin || e.source !== quadro.contentWindow) return;
+    var d = e.data || {};
+    if (d.tipo !== 'scalambrini-simulador-altura') return;
+    var h = parseInt(d.altura, 10);
+    if (h > 300 && h < 20000) quadro.style.height = h + 'px';
+  });
+})();
+</script>
 <script src="/assets/js/site.js?v=20261106" defer></script>
-<script src="/assets/js/medicao.js?v=20261106" defer></script>
+<script src="/assets/js/medicao.js?v=20261109" defer></script>
 <script src="/assets/js/contato.js?v=20261106" defer></script>
 </body>
 </html>
