@@ -309,6 +309,10 @@
 
   if (!ativo) return;
 
+  // Simulador incorporado na página de Reforma Tributária: aviso de cookies e medição ficam
+  // a cargo da página principal, para não exibir o aviso duas vezes nem duplicar eventos.
+  if (window.self !== window.top && document.documentElement.classList.contains('incorporado')) return;
+
   function iniciar() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-preferencias-cookies]'), function (b) {
       b.hidden = false;

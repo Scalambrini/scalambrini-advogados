@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calculadora da transição IBS/CBS · Scalambrini e Saraiva Advogados</title>
+<title>Simulador da Reforma Tributária — IBS e CBS · Scalambrini e Saraiva Advogados</title>
 <meta name="description" content="Simule, ano a ano de 2026 a 2033, o efeito da Reforma Tributária (EC 132/2023 e LC 214/2025) sobre o preço, os débitos, os créditos e a carga de uma operação.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Calculadora da transição IBS/CBS (2026–2033)">
+<meta property="og:title" content="Simulador da Reforma Tributária — IBS e CBS (2026–2033)">
 <meta property="og:description" content="Preço, débitos, créditos e carga de uma operação, ano a ano, da fase de teste à vigência plena do IBS e da CBS.">
 <meta property="og:image" content="https://scalambrini.com/marca/compartilhamento.png?v=20261103">
 <meta property="og:url" content="https://scalambrini.com/calculadora/">
@@ -19,6 +19,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<script>
+/* Modo incorporado: quando a página é aberta dentro da página de Reforma Tributária
+   (/reforma-tributaria/#simulador), exibe apenas o simulador. Aberta diretamente,
+   inclusive com ?incorporado=1, a página continua completa. */
+(function () {
+  try {
+    if (window.self !== window.top && /(^|[?&])incorporado=1(&|$)/.test(location.search.slice(1))) {
+      document.documentElement.className += ' incorporado';
+    }
+  } catch (e) { /* acesso ao topo bloqueado: trata como incorporado */
+    document.documentElement.className += ' incorporado';
+  }
+})();
+</script>
 <style>
 :root{
   --navy:#131A2C;--navy2:#0D1322;--gold:#B89359;--goldd:#8A6A33;
@@ -169,6 +183,15 @@ td.neg{color:var(--brick)}
 @media (max-width:420px){
   .seg label{font-size:13px;padding:10px}
 }
+/* modo incorporado (dentro da página de Reforma Tributária) */
+.selo{text-decoration:none}
+a.selo:hover{text-decoration:underline;text-underline-offset:3px}
+.incorporado body{background:transparent}
+.incorporado .topo,.incorporado .hero,.incorporado .contato-calc,.incorporado .rodape{display:none}
+.incorporado .wrap{max-width:none;padding-left:0;padding-right:0}
+.incorporado .grade{padding-top:0}
+.incorporado .metodo{padding-bottom:4px}
+
 @media print{
   .topo,.presets,.acoes,.hero .atualizado,.contato-calc{display:none}
   .hero{background:#fff;color:var(--ink);border:0}
@@ -190,14 +213,14 @@ td.neg{color:var(--brick)}
 <header class="topo">
   <div class="wrap topo-in">
     <a class="marca" href="https://scalambrini.com/" aria-label="Scalambrini e Saraiva Advogados — página inicial"><img src="/marca/logo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados" width="1010" height="401"></a>
-    <span class="selo">Reforma Tributária</span>
+    <a class="selo" href="/reforma-tributaria/">Reforma Tributária</a>
   </div>
 </header>
 
 <section class="hero" aria-labelledby="titulo">
   <div class="wrap">
     <p class="kicker">Simulador · EC 132/2023 e LC 214/2025</p>
-    <h1 id="titulo">Calculadora da transição IBS/CBS</h1>
+    <h1 id="titulo">Simulador da Reforma Tributária — IBS e CBS</h1>
     <p class="lead">Veja, ano a ano entre 2026 e 2033, como a troca de PIS, Cofins, IPI, ICMS e ISS pela CBS e pelo IBS altera o preço, os débitos, os créditos e a carga tributária de uma operação.</p>
     <p class="atualizado">Regras e alíquotas conferidas em 2 de novembro de 2026.</p>
   </div>
@@ -404,7 +427,7 @@ td.neg{color:var(--brick)}
     </div>
     <div class="botoes">
       <a class="b-prim" href="/reforma-tributaria/#contato">Fale com o escritório</a>
-      <a class="b-sec" href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Usei%20a%20calculadora%20da%20transi%C3%A7%C3%A3o%20IBS%2FCBS%20no%20site%20e%20gostaria%20de%20falar%20com%20o%20escrit%C3%B3rio." data-posicao="calculadora">WhatsApp</a>
+      <a class="b-sec" href="https://wa.me/5511964056680?text=Ol%C3%A1!%20Usei%20o%20simulador%20da%20Reforma%20Tribut%C3%A1ria%20%28IBS%20e%20CBS%29%20no%20site%20e%20gostaria%20de%20falar%20com%20o%20escrit%C3%B3rio." data-posicao="calculadora">WhatsApp</a>
     </div>
   </div>
 </section>
@@ -417,7 +440,7 @@ td.neg{color:var(--brick)}
   </div>
 </footer>
 
-<noscript><p class="wrap">Ative o JavaScript para usar a calculadora.</p></noscript>
+<noscript><p class="wrap">Ative o JavaScript para usar o simulador.</p></noscript>
 
 <script>
 (function () {
@@ -727,15 +750,28 @@ td.neg{color:var(--brick)}
     avisar.t = setTimeout(function () { m.textContent = ''; }, 3500);
   }
 
+  // No modo incorporado, o link compartilhado e a planilha apontam para a página completa do simulador
+  var INCORPORADO = document.documentElement.classList.contains('incorporado');
+  function enderecoBase() {
+    return INCORPORADO ? location.origin + location.pathname : location.href.split('#')[0];
+  }
+
   $('b-link').addEventListener('click', function () {
-    var url = location.href.split('#')[0] + '#' + estadoParaHash();
-    history.replaceState(null, '', url);
+    var url = enderecoBase() + '#' + estadoParaHash();
+    if (!INCORPORADO) history.replaceState(null, '', url);
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(function () { avisar('Link copiado.'); }, function () { avisar('Link atualizado na barra de endereço.'); });
+      navigator.clipboard.writeText(url).then(function () { avisar('Link copiado.'); }, function () { falhaCopia(url); });
     } else {
-      avisar('Link atualizado na barra de endereço.');
+      falhaCopia(url);
     }
   });
+
+  function falhaCopia(url) {
+    if (!INCORPORADO) { avisar('Link atualizado na barra de endereço.'); return; }
+    // incorporado: não há barra de endereço própria; abre a simulação na página completa
+    window.open(url, '_blank', 'noopener');
+    avisar('Simulação aberta em nova aba.');
+  }
 
   $('b-csv').addEventListener('click', function () {
     if (!ultimo) return;
@@ -747,7 +783,7 @@ td.neg{color:var(--brick)}
     });
     linhas.push('');
     linhas.push('Cenário;' + (ultimo.p.cenario === 'com' ? 'IBS/CBS na base do ICMS/ISS' : 'IBS/CBS fora da base do ICMS/ISS'));
-    linhas.push('Simulação informativa — Scalambrini e Saraiva Advogados — ' + location.href.split('#')[0]);
+    linhas.push('Simulação informativa — Scalambrini e Saraiva Advogados — ' + enderecoBase());
     var blob = new Blob(['﻿' + linhas.join('\r\n')], {type: 'text/csv;charset=utf-8'});
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -765,8 +801,24 @@ td.neg{color:var(--brick)}
   // ---------- início ----------
   if (hashParaEstado()) marcarPreset(null);
   atualizar();
+
+  // ---------- altura no modo incorporado ----------
+  // Informa à página de Reforma Tributária (mesma origem) a altura do conteúdo, para o quadro não ter rolagem própria.
+  if (INCORPORADO && window.parent !== window) {
+    var alturaEnviada = 0;
+    var enviarAltura = function () {
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      if (Math.abs(h - alturaEnviada) < 2) return;
+      alturaEnviada = h;
+      window.parent.postMessage({ tipo: 'scalambrini-simulador-altura', altura: h }, location.origin);
+    };
+    if (typeof ResizeObserver === 'function') new ResizeObserver(enviarAltura).observe(document.documentElement);
+    window.addEventListener('load', enviarAltura);
+    document.querySelectorAll('.metodo details').forEach(function (d) { d.addEventListener('toggle', enviarAltura); });
+    enviarAltura();
+  }
 })();
 </script>
-<script src="/assets/js/medicao.js?v=20261106" defer></script>
+<script src="/assets/js/medicao.js?v=20261109" defer></script>
 </body>
 </html>
