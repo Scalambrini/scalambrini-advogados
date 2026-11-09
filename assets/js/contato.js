@@ -224,7 +224,7 @@
       definirOculto('wbraid', ids.wbraid);
       var caixa = form.elements.consentimento_transferencia_internacional;
       definirOculto('consentimento_transferencia_registro', caixa && caixa.checked && !caixa.disabled
-        ? new Date().toISOString() + ' · texto do formulário de 06/11/2026 (art. 33, VIII, LGPD)'
+        ? new Date().toISOString() + ' · texto do formulário de 09/11/2026 (art. 33, VIII, LGPD)'
         : '');
       var assunto = T.assunto + ' — ' + (valor('area') || '-') + (valor('empresa') ? ' — ' + valor('empresa') : '');
       definirOculto('_subject', assunto);
