@@ -63,7 +63,7 @@ main:focus{outline:none}
 .form-sucesso h3:focus{outline:none}
 .form-sucesso p{margin:0;font-size:15px;line-height:1.7}
 
-/* Áreas de atuação: três colunas a partir de 960px; abaixo disso, uma coluna (evita cartão isolado em tablets) */
+/* Áreas de atuação: grade definida na própria página (duas colunas com quatro cards) a partir de 960px; abaixo disso, uma coluna */
 @media (max-width: 959px){.grade-areas{grid-template-columns:1fr!important}}
 /* Rótulo do núcleo acima do título de cada card (liga os cards aos núcleos do escritório) */
 .nucleo-card{margin:0 0 -6px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#8A6A33;line-height:1.4}
