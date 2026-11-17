@@ -1,9 +1,9 @@
 /* Medição (Google Analytics 4 e Google Ads) com gerenciamento de consentimento
  * Scalambrini e Saraiva Advogados
  *
- * ESTADO ATUAL: DESATIVADO.
- * Enquanto GA4_ID e ADS_ID estiverem vazios, este arquivo não carrega nenhuma tag, não grava
- * cookies, não exibe aviso de cookies e não envia dados a terceiros.
+ * ESTADO ATUAL: GA4 ATIVO (G-4RQ57NZSDQ, nov/2026); Google Ads ainda desativado (ADS_ID vazio).
+ * Com GA4_ID e ADS_ID vazios, este arquivo não carrega nenhuma tag, não grava cookies,
+ * não exibe aviso de cookies e não envia dados a terceiros.
  *
  * Ao preencher os identificadores (veja o guia de ativação):
  *  - o aviso de cookies passa a ser exibido, com "Aceitar" e "Recusar" de mesmo destaque;
@@ -18,6 +18,7 @@
  *  - clique_telefone      clique em link de telefone
  *  - clique_email         clique em link de e-mail
  *  - formulario_iniciado  primeira digitação em um formulário
+ *  - pdf_simulacao        geração do PDF nas calculadoras (elementos com data-evento)
  *  - "Contato qualificado" NÃO é registrado no site: é importado depois no Google Ads pelo
  *    escritório, a partir do GCLID recebido no formulário (planilha de conversões offline).
  */
@@ -25,7 +26,7 @@
   'use strict';
 
   var CONFIG = {
-    GA4_ID: '',                 // ID de métricas do GA4, no formato G-XXXXXXXXXX
+    GA4_ID: 'G-4RQ57NZSDQ',     // ID de métricas do GA4, no formato G-XXXXXXXXXX
     ADS_ID: '',                 // ID de conversão do Google Ads, no formato AW-XXXXXXXXXX
     ADS_ROTULO_FORMULARIO: '',  // rótulo da ação de conversão "Formulário enviado" (principal)
     ADS_ROTULO_WHATSAPP: '',    // rótulo da ação "Clique no WhatsApp" (secundária) — opcional
@@ -205,6 +206,14 @@
     if (/^https:\/\/(wa\.me|api\.whatsapp\.com)\//.test(h)) registrar('clique_whatsapp', { posicao: posicao(a) });
     else if (h.indexOf('tel:') === 0) registrar('clique_telefone', { posicao: posicao(a) });
     else if (h.indexOf('mailto:') === 0) registrar('clique_email', { posicao: posicao(a) });
+  }, true);
+
+  // Elementos marcados com data-evento (ex.: botão de PDF das calculadoras).
+  document.addEventListener('click', function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-evento]') : null;
+    if (!el || el.disabled) return;
+    var nome = el.getAttribute('data-evento');
+    if (/^[a-z_]{1,40}$/.test(nome)) registrar(nome, { posicao: el.getAttribute('data-posicao') || '' });
   }, true);
 
   document.addEventListener('scalambrini:formulario-iniciado', function (e) {
