@@ -292,22 +292,22 @@
     var vincs = (tipo === 'ncm' ? idx.ncmCls : idx.nbsCls)[c.id] || [];
     var exs = tipo === 'ncm' ? idx.exNcm : idx.exNbs;
     var vigentes = vincs.filter(function (a) { return vigente(a[4], a[5], data); });
-    if (!vigentes.length) return { temAnexo: false, aceito: true, itens: [] };
+    if (!vigentes.length) return { temAnexo: false, aceito: true, itens: [], vinculos: [] };
     var cobre = vigentes.filter(function (a) { return codigo.indexOf(a[1]) === 0; });
-    if (!cobre.length) return { temAnexo: true, aceito: false, itens: [] };
+    if (!cobre.length) return { temAnexo: true, aceito: false, itens: [], vinculos: [] };
     var excecao = cobre.some(function (a) {
       return (exs[a[0]] || []).some(function (e) { return codigo.indexOf(e[1]) === 0 && vigente(e[2], e[3], data); });
     });
     var semExcecao = cobre.some(function (a) {
       return !(exs[a[0]] || []).some(function (e) { return vigente(e[2], e[3], data); });
     });
-    if (excecao && !semExcecao) return { temAnexo: true, aceito: false, itens: [] };
-    var itens = [];
+    if (excecao && !semExcecao) return { temAnexo: true, aceito: false, itens: [], vinculos: [] };
+    var itens = [], vinculos = [];
     cobre.forEach(function (a) {
       var excluido = (exs[a[0]] || []).some(function (e) { return codigo.indexOf(e[1]) === 0 && vigente(e[2], e[3], data); });
-      if (!excluido && a[3] && itens.indexOf(a[3]) < 0) itens.push(a[3]);
+      if (!excluido && a[3] && itens.indexOf(a[3]) < 0) { itens.push(a[3]); vinculos.push([a[3], a[1]]); }
     });
-    return { temAnexo: true, aceito: true, itens: itens };
+    return { temAnexo: true, aceito: true, itens: itens, vinculos: vinculos };
   };
 
   Motor.D = D;

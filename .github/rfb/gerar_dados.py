@@ -48,6 +48,76 @@ def montar_banco(rfb, destino):
     return con
 
 
+ROMANOS = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV']
+VAZIAS = set(('servicos servico de da do das dos e em para ou os as com nao a o na no nas nos por que outros outras outro outra '
+              'exceto inclusive mesmo qualquer sua seu suas seus classificados subposicoes anteriores relacionados destinados destinadas '
+              'diretamente demais').split())
+SINONIMOS = {'ensin': 'educa'}  # "ensino" (anexo II) = "educação" (NBS)
+
+
+def termos(s):
+    import unicodedata
+    s = unicodedata.normalize('NFD', (s or '').lower()).encode('ascii', 'ignore').decode()
+    out = set()
+    for p in re.findall(r'[a-z]{3,}', s):
+        if p not in VAZIAS:
+            p = p[:5]
+            out.add(SINONIMOS.get(p, p))
+    return out
+
+
+def contencao(descricao, texto):
+    d, t = termos(descricao), termos(texto)
+    return len(d & t) / len(d) if d else 0.0
+
+
+def corrigir_anexos(con, ncm_ap, nbs_ap):
+    """Corrige os vínculos código → item de anexo das tabelas da Receita.
+
+    Na base V0059, os vínculos NBS_APLICAVEL → ANEXO estão deslocados (ex.: NBS 1.2301.92.00,
+    fisioterapia, apontava para o item 10 do Anexo III, enfermagem; o correto é o item 11), e dois
+    vínculos NCM apontam para item de outro anexo. As regras de cálculo e de enquadramento não mudam:
+    só o item exibido. Para NBS, o item é refeito pela descrição oficial do código, dentro do anexo da
+    classificação; se não houver correspondência inequívoca, nenhum item é exibido.
+    Retorna a lista de alterações."""
+    anexos = {r[0]: (r[1], r[2], r[3]) for r in con.execute(
+        "SELECT ANXO_ID, ANXO_NUMERO, ANXO_NUMERO_ITEM, ANXO_TEXTO_ITEM FROM ANEXO")}
+    por_numero = {}
+    for aid, (n, i, t) in anexos.items():
+        por_numero.setdefault(n, []).append((aid, i, t))
+    anexo_classe = {r[0]: ROMANOS[int(r[1])] if (r[1] or '').isdigit() and int(r[1]) < len(ROMANOS) else None
+                    for r in con.execute("SELECT CLTR_ID, CLTR_ANEXO FROM CLASSIFICACAO_TRIBUTARIA")}
+    desc_nbs = {r[0]: r[1] for r in con.execute("SELECT NBS_CD, NBS_DESCRICAO FROM NBS")}
+    alteracoes = []
+
+    def rotulo(aid):
+        return '%s-%s' % anexos[aid][:2] if aid in anexos else '-'
+
+    for l in nbs_ap:  # [id, codigo, cltr, anexo, inicio, fim]
+        aid, esperado = l[3], anexo_classe.get(l[2])
+        if aid is None:
+            continue
+        desc = desc_nbs.get(l[1], '')
+        cands = sorted(((contencao(desc, t), len(termos(desc) & termos(t)) / max(1, len(termos(desc) | termos(t))), a)
+                        for a, i, t in por_numero.get(esperado, [])), reverse=True)
+        # aceita o item só se for a melhor correspondência do anexo, sem empate
+        novo = None
+        if cands and cands[0][0] >= 0.75 and (len(cands) == 1 or cands[0][:2] > cands[1][:2]):
+            novo = cands[0][2]
+        if novo == aid:
+            continue
+        alteracoes.append(('NBS', l[1], l[2], rotulo(aid), rotulo(novo) if novo else 'sem item'))
+        l[3] = novo
+
+    for l in ncm_ap:
+        aid, esperado = l[3], anexo_classe.get(l[2])
+        if aid is None or aid not in anexos or anexos[aid][0] == esperado:
+            continue
+        alteracoes.append(('NCM', l[1], l[2], rotulo(aid), 'sem item'))
+        l[3] = None
+    return alteracoes
+
+
 def num(v):
     if v is None:
         return None
@@ -152,6 +222,13 @@ def exportar(con, saida, commit, referencia):
     ncm_ex = [list(r) for r in q("SELECT ENCM_NCMA_ID, ENCM_NCM_CD, ENCM_INICIO_VIGENCIA, ENCM_FIM_VIGENCIA FROM EXCECAO_NCM_APLICAVEL")]
     nbs_ap = [list(r) for r in q("SELECT NBSA_ID, NBSA_NBS_CD, NBSA_CLTR_ID, NBSA_ANXO_ID, NBSA_INICIO_VIGENCIA, NBSA_FIM_VIGENCIA FROM NBS_APLICAVEL ORDER BY NBSA_ID")]
     nbs_ex = [list(r) for r in q("SELECT ENBS_NBSA_ID, ENBS_NBS_CD, ENBS_INICIO_VIGENCIA, ENBS_FIM_VIGENCIA FROM EXCECAO_NBS_APLICAVEL")]
+    con.row_factory = None
+    alteracoes = corrigir_anexos(con, ncm_ap, nbs_ap)
+    con.row_factory = sqlite3.Row
+    cl_cd = {r['CLTR_ID']: r['CLTR_CD'] for r in q("SELECT CLTR_ID, CLTR_CD FROM CLASSIFICACAO_TRIBUTARIA")}
+    print('Vínculos código → item de anexo corrigidos: %d' % len(alteracoes))
+    for a in alteracoes:
+        print('  %s %s (cClassTrib %s): %s -> %s' % (a[0], a[1], cl_cd.get(a[2], a[2]), a[3], a[4]))
 
     base = {
         'meta': meta, 'cst': cst, 'trat': trat, 'aliqRef': aliq_ref, 'aliqPadraoRegistros': aliq_padrao,

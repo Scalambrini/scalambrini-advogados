@@ -21,7 +21,7 @@
   var UF_PADRAO = '35', MUN_PADRAO = '3550308';
 
   var base = null, motor = null, municipios = null;
-  var listas = { ncm: null, nbs: null }, carregandoLista = {};
+  var listas = { ncm: null, nbs: null }, descricoes = { ncm: {}, nbs: {} }, carregandoLista = {}, itensPorAnexo = null;
   var estado = { tipo: 'ncm', item: null, clId: null, ano: 2026, valor: '1000', cbs: null, ibs: null, uf: UF_PADRAO, mun: MUN_PADRAO };
   var opcoesAtuais = null, ultimo = null;
 
@@ -77,7 +77,7 @@
   }
 
   function prepararLista(tipo, dados) {
-    var mapa = {}, folhas = [], tam = tipo === 'ncm' ? 8 : 9;
+    var mapa = descricoes[tipo], folhas = [], tam = tipo === 'ncm' ? 8 : 9;
     dados.forEach(function (l) { mapa[l[0]] = l[1]; });
     dados.forEach(function (l) {
       var cd = l[0];
@@ -274,7 +274,9 @@
       } else if (c.tipo !== 'Sem alíquota' && ano === 2026 && motor.aliquotaReferencia(2, data) === null) return;
       var cr = motor.criticar(tipo, cod, c, data);
       if (cr.temAnexo && !cr.aceito) return;
-      var o = { c: c, st: st, tt: tt, itens: cr.itens, especifico: cr.temAnexo };
+      // só entram no relatório os itens de anexo compatíveis com o código (vinculos.js)
+      var itens = cr.vinculos.filter(function (vi) { return itemCompativel(tipo, vi[1], c, vi[0]); }).map(function (vi) { return vi[0]; });
+      var o = { c: c, st: st, tt: tt, itens: itens, especifico: cr.temAnexo };
       if (cr.temAnexo) res.esp.push(o);
       else if (c.cd === '000001') res.geral.push(o);
       else (res.outros[st.cd] = res.outros[st.cd] || []).push(o);
@@ -335,6 +337,19 @@
     if (!opcoesAtuais || !estado.clId) return null;
     for (var k = 0; k < opcoesAtuais.todos.length; k++) if (opcoesAtuais.todos[k].c.id === estado.clId) return opcoesAtuais.todos[k];
     return null;
+  }
+
+  function itemCompativel(tipo, codigoVinculo, c, idAnexo) {
+    var item = base.anexos[String(idAnexo)];
+    if (!item) return false;
+    if (!itensPorAnexo) {
+      itensPorAnexo = {};
+      Object.keys(base.anexos).forEach(function (k) { var x = base.anexos[k]; (itensPorAnexo[x[0]] = itensPorAnexo[x[0]] || []).push(x[2]); });
+    }
+    return window.VinculosAnexo.compativel({
+      tipo: tipo, codigo: codigoVinculo, descricao: descricoes[tipo][codigoVinculo], anexoClasse: c.anexo,
+      item: item, itensDoAnexo: itensPorAnexo[item[0]]
+    });
   }
 
   function textoAnexo(id) {

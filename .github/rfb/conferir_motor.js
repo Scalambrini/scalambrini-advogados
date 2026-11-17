@@ -94,4 +94,27 @@ ent.itens.forEach((it, k) => {
 
 console.log(`Casos conferidos: ${ok} sem divergência, ${falhas} com divergência; ${comparacoes} valores comparados.`);
 console.log('Fora do escopo da calculadora:', JSON.stringify(pulados));
-process.exit(falhas ? 1 : 0);
+
+// 3) Vínculos código → item de anexo: nenhum item exibido pode ser incompatível com o código
+const Vinculos = require(path.join(raiz, 'calculadora/ncm-nbs/vinculos.js'));
+const descricoes = {};
+['ncm', 'nbs'].forEach(t => {
+  descricoes[t] = {};
+  JSON.parse(fs.readFileSync(path.join(raiz, 'calculadora/ncm-nbs/dados/' + t + '.json'), 'utf8')).forEach(l => { descricoes[t][l[0]] = l[1]; });
+});
+const itensPorAnexo = {};
+Object.values(base.anexos).forEach(a => { (itensPorAnexo[a[0]] = itensPorAnexo[a[0]] || []).push(a[2]); });
+const classePorId = {};
+base.class.forEach(c => { classePorId[c.id] = c; });
+let vinculosOk = 0, vinculosRuins = 0, semItem = 0;
+[['ncm', base.ncmAp], ['nbs', base.nbsAp]].forEach(([tipo, lista]) => lista.forEach(l => {
+  const c = classePorId[l[2]];
+  if (!c || !l[3]) { semItem++; return; }
+  const item = base.anexos[String(l[3])];
+  const v = { tipo, codigo: l[1], descricao: descricoes[tipo][l[1]], anexoClasse: c.anexo, item, itensDoAnexo: item ? itensPorAnexo[item[0]] : [] };
+  if (Vinculos.compativel(v)) vinculosOk++;
+  else { vinculosRuins++; console.log(`VÍNCULO INCOMPATÍVEL ${tipo.toUpperCase()} ${l[1]} (cClassTrib ${c.cd}) → Anexo ${item ? item[0] + ', item ' + item[1] + ': ' + item[2].slice(0, 70) : '?'}`); }
+}));
+console.log(`Vínculos código → item de anexo: ${vinculosOk} compatíveis, ${vinculosRuins} incompatíveis, ${semItem} sem item.`);
+
+process.exit(falhas || vinculosRuins ? 1 : 0);
