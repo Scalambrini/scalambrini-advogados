@@ -789,6 +789,21 @@
   carregar('dados/municipios.json').then(function (m) { municipios = m; montarUfs(); if (ultimo) atualizar(); })
     .catch(function () { $('uf').innerHTML = '<option value="">Indisponível</option>'; $('municipio').innerHTML = '<option value="">Indisponível</option>'; });
 
+  // Modo incorporado: informa à página de Reforma Tributária (mesma origem) a altura do conteúdo,
+  // para o quadro não ter rolagem própria.
+  if (document.documentElement.classList.contains('incorporado') && window.parent !== window) {
+    var alturaEnviada = 0;
+    var enviarAltura = function () {
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      if (Math.abs(h - alturaEnviada) < 2) return;
+      alturaEnviada = h;
+      window.parent.postMessage({ tipo: 'scalambrini-simulador-altura', altura: h }, location.origin);
+    };
+    if (typeof ResizeObserver === 'function') new ResizeObserver(enviarAltura).observe(document.documentElement);
+    window.addEventListener('load', enviarAltura);
+    enviarAltura();
+  }
+
   // Link de simulação colado na mesma página: recarrega com os novos parâmetros
   // (as atualizações feitas pela própria calculadora usam replaceState e não disparam este evento).
   window.addEventListener('hashchange', function () { location.reload(); });

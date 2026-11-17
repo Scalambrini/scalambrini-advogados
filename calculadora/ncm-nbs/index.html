@@ -19,6 +19,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<script>
+/* Modo incorporado: aberta dentro da página de Reforma Tributária (/reforma-tributaria/#simulador)
+   com ?incorporado=1, exibe só a calculadora. Aberta diretamente, a página continua completa. */
+(function () {
+  try {
+    if (window.self !== window.top && /(^|[?&])incorporado=1(&|$)/.test(location.search.slice(1))) {
+      document.documentElement.className += ' incorporado';
+    }
+  } catch (e) { document.documentElement.className += ' incorporado'; }
+})();
+</script>
 <style>
 :root{
   --navy:#131A2C;--navy2:#0D1322;--gold:#B89359;--goldd:#8A6A33;
@@ -182,6 +193,13 @@ td.forte{font-weight:600;color:var(--navy)}
 .preferencias-cookies{min-height:32px;padding:0;background:none;border:0;color:#AEB7C4;font:inherit;text-decoration:underline;cursor:pointer}
 .preferencias-cookies[hidden]{display:none}
 .carregando{color:var(--muted);font-size:13px}
+
+/* modo incorporado (dentro da página de Reforma Tributária) */
+.incorporado body{background:transparent}
+.incorporado .topo,.incorporado .hero,.incorporado .rodape{display:none}
+.incorporado .wrap{max-width:none;padding-left:0;padding-right:0}
+.incorporado .grade{padding-top:0}
+.incorporado .metodo{padding-bottom:4px}
 
 @media (max-width:360px){.duas{grid-template-columns:1fr}}
 @media (max-width:420px){.seg label{font-size:13px;padding:10px}}
@@ -404,7 +422,7 @@ td.forte{font-weight:600;color:var(--navy)}
 <script src="/assets/vendor/decimal-10.6.0.min.js"></script>
 <script src="motor.js?v=20261117"></script>
 <script src="vinculos.js?v=20261117"></script>
-<script src="app.js?v=20261117"></script>
+<script src="app.js?v=20261118"></script>
 <script src="/assets/js/medicao.js?v=20261109" defer></script>
 </body>
 </html>
