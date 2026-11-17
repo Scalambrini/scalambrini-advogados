@@ -125,10 +125,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <a href="/" style="display: block; width: clamp(150px, 15vw, 184px); padding: 2px 0"><img src="/marca/logo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados — página inicial" width="1010" height="401" style="display: block; width: 100%; height: auto"></a>
 <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-principal"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button>
 <nav id="menu-principal" class="menu-principal" aria-label="Menu principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 30px">
+<a href="#simulador" style="display: inline-flex; align-items: center; min-height: 44px; color: #8A6A33; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase">Calculadora</a>
 <a href="#transicao" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">A transição</a>
 <a href="#impactos" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Pontos de atenção</a>
 <a href="#atuacao" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Atuação</a>
-<a href="#simulador" style="display: inline-flex; align-items: center; min-height: 44px; color: #8A6A33; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase">Calculadora</a>
 <a href="/" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">O Escritório</a>
 <a href="#contato" style="display: inline-flex; align-items: center; min-height: 44px; color: #1F2328; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase">Contato</a>
 </nav>
@@ -148,6 +148,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <a class="btn btn-contorno" href="#simulador">Calculadora IBS e CBS</a>
 </div>
 <p class="nota">Reuniões presenciais em São Paulo ou por videoconferência.</p>
+</div>
+</section>
+
+<section id="simulador" class="secao suave" aria-labelledby="t-simulador">
+<div class="wrap">
+<div class="cabeca">
+<p class="kicker">Calculadora gratuita — sem cadastro</p>
+<h2 id="t-simulador">Calculadora de IBS e CBS por produto e serviço</h2>
+<p class="texto">Informe o NCM do produto ou a NBS do serviço e veja o enquadramento previsto na LC 214/2025, as reduções de alíquota, os efeitos sobre créditos e o valor da CBS e do IBS da operação, com relatório em PDF. Os resultados são estimativas de caráter informativo.</p>
+</div>
+<div class="simulador-quadro">
+<button type="button" class="btn btn-azul simulador-abrir" aria-expanded="false" aria-controls="quadro-simulador" hidden>Usar a calculadora nesta página</button>
+<iframe id="quadro-simulador" data-src="/calculadora/ncm-nbs/?incorporado=1" title="Calculadora de IBS e CBS por produto e serviço" allow="clipboard-write"></iframe>
+<noscript><p class="nota">Para usar a calculadora, ative o JavaScript do navegador.</p></noscript>
+</div>
+<p class="nota simulador-rodape">A simulação não substitui a análise da operação e da legislação aplicável a cada caso. <a href="/calculadora/ncm-nbs/">Abrir a calculadora em página inteira</a> · <a href="/calculadora/">Simulador da transição 2026–2033</a> · <a href="#contato">Fale com o escritório sobre a sua operação</a></p>
 </div>
 </section>
 
@@ -213,22 +229,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div class="acoes" style="margin-top: 36px">
 <a class="btn btn-ouro" href="#contato">Fale com o escritório</a>
 </div>
-</div>
-</section>
-
-<section id="simulador" class="secao" aria-labelledby="t-simulador">
-<div class="wrap">
-<div class="cabeca">
-<p class="kicker">Calculadora gratuita — sem cadastro</p>
-<h2 id="t-simulador">Calculadora de IBS e CBS por produto e serviço</h2>
-<p class="texto">Informe o NCM do produto ou a NBS do serviço e veja o enquadramento previsto na LC 214/2025, as reduções de alíquota, os efeitos sobre créditos e o valor da CBS e do IBS da operação, com relatório em PDF. Os resultados são estimativas de caráter informativo.</p>
-</div>
-<div class="simulador-quadro">
-<button type="button" class="btn btn-azul simulador-abrir" aria-expanded="false" aria-controls="quadro-simulador" hidden>Usar a calculadora nesta página</button>
-<iframe id="quadro-simulador" data-src="/calculadora/ncm-nbs/?incorporado=1" title="Calculadora de IBS e CBS por produto e serviço" allow="clipboard-write"></iframe>
-<noscript><p class="nota">Para usar a calculadora, ative o JavaScript do navegador.</p></noscript>
-</div>
-<p class="nota simulador-rodape">A simulação não substitui a análise da operação e da legislação aplicável a cada caso. <a href="/calculadora/ncm-nbs/">Abrir a calculadora em página inteira</a> · <a href="/calculadora/">Simulador da transição 2026–2033</a> · <a href="#contato">Fale com o escritório sobre a sua operação</a></p>
 </div>
 </section>
 
