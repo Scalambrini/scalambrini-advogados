@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de IBS e CBS por NCM e NBS · Scalambrini e Saraiva Advogados</title>
+<meta name="description" content="Encontre o NCM ou a NBS do seu produto ou serviço, veja os enquadramentos previstos na LC 214/2025 e calcule a CBS e o IBS da operação, com as tabelas do código aberto da Receita Federal.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora de IBS e CBS por NCM e NBS">
+<meta property="og:description" content="Enquadramento (cClassTrib), reduções de alíquota, créditos e memória de cálculo da CBS e do IBS, com relatório em PDF.">
+<meta property="og:image" content="https://scalambrini.com/marca/compartilhamento.png?v=20261103">
+<meta property="og:url" content="https://scalambrini.com/calculadora/ncm-nbs/">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#131A2C">
+<link rel="canonical" href="https://scalambrini.com/calculadora/ncm-nbs/">
+<link rel="icon" href="/favicon.ico?v=20261103" sizes="any">
+<link rel="icon" href="/favicon.svg?v=20261103" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20261103">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --navy:#131A2C;--navy2:#0D1322;--gold:#B89359;--goldd:#8A6A33;
+  --ink:#1F2328;--muted:#5A6270;--line:#E3E6EA;--soft:#F5F6F8;--bg:#FFFFFF;
+  --brick:#B4432F;--field:#C9CED6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Poppins','Helvetica Neue',Arial,sans-serif}
+a{color:var(--navy)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* topo */
+.topo{background:#fff;border-bottom:1px solid var(--line)}
+.topo-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px}
+.marca{display:block}
+.marca img{display:block;width:clamp(128px,14vw,168px);height:auto}
+.selo{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--goldd);font-weight:600;text-align:right;text-decoration:none}
+a.selo:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;border-top:3px solid var(--gold)}
+.hero .wrap{padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(34px,6vw,60px)}
+.kicker{margin:0 0 12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{margin:0;font-weight:600;letter-spacing:-.02em;font-size:clamp(30px,4.6vw,52px);line-height:1.12;max-width:16em;text-wrap:balance}
+.lead{margin:16px 0 0;max-width:46em;color:#D5DAE1;font-size:clamp(15px,1.6vw,18px);line-height:1.65}
+.atualizado{margin:16px 0 0;font-size:13px;color:#AEB7C4;max-width:52em}
+.atualizado a{color:#D2B07A;text-underline-offset:3px}
+
+/* grade */
+.grade{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;padding-top:28px;padding-bottom:24px}
+@media (min-width:1000px){.grade{grid-template-columns:400px minmax(0,1fr);align-items:start}}
+.painel{border:1px solid var(--line);border-radius:14px;padding:clamp(16px,2.4vw,24px);background:#fff;min-width:0}
+.tit{margin:0;font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--navy);line-height:1.3}
+.secao{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.secao-tit{margin:0;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--goldd);font-weight:600}
+.secao-dica{margin:6px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* campos */
+.campo{display:grid;gap:5px;margin-top:14px;min-width:0}
+.campo > label,.rot-campo{font-size:14px;font-weight:500;line-height:1.35}
+.dica{font-size:12.5px;color:var(--muted);line-height:1.45}
+.entrada{position:relative}
+.entrada .un{position:absolute;top:50%;transform:translateY(-50%);font-size:14px;color:var(--muted);pointer-events:none}
+.entrada .un.esq{left:12px}
+.entrada .un.dir{right:12px}
+.entrada input.com-esq{padding-left:40px}
+.entrada input.com-dir{padding-right:34px}
+input[type=text],input[type=search],input[type=number],select{font:inherit;font-size:16px;width:100%;min-height:46px;padding:8px 12px;border:1px solid var(--field);border-radius:9px;background:#fff;color:var(--ink);font-variant-numeric:tabular-nums}
+input[type=search]{-webkit-appearance:none;appearance:none}
+input[type=search]::-webkit-search-cancel-button{display:none}
+select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px;text-overflow:ellipsis}
+select:disabled,input:disabled{background-color:var(--soft);color:#8A93A3}
+input:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.duas .campo{align-content:start}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--field);border-radius:11px;overflow:hidden;margin-top:14px}
+.seg > div{position:relative}
+.seg > div + div{border-left:1px solid var(--field)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:block;height:100%;padding:10px 13px;cursor:pointer;font-size:14px;font-weight:500;line-height:1.3}
+.seg label small{display:block;margin-top:2px;font-weight:400;color:var(--muted);font-size:12px}
+.seg input:checked + label{background:var(--navy);color:#fff}
+.seg input:checked + label small{color:#C9CFD8}
+.seg input:focus-visible + label{outline:2px solid var(--gold);outline-offset:-3px}
+
+/* busca */
+.busca{position:relative}
+.lista{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);max-height:min(360px,55vh);overflow:auto;margin:0;padding:4px;list-style:none;background:#fff;border:1px solid var(--field);border-radius:10px;box-shadow:0 12px 30px rgba(19,26,44,.14);-webkit-overflow-scrolling:touch}
+.lista li{padding:9px 10px;border-radius:7px;cursor:pointer;font-size:14px;line-height:1.4}
+.lista li[aria-selected="true"],.lista li:hover{background:var(--soft)}
+.lista .cod{display:inline-block;min-width:7.2em;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.lista .ctx{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+.lista .vazio{cursor:default;color:var(--muted)}
+.escolhido{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;margin-top:8px;padding:11px 12px;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;background:#FBF7EF;font-size:13.5px;line-height:1.45}
+.escolhido strong{color:var(--navy);font-variant-numeric:tabular-nums}
+.escolhido .ctx{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.link-bt{flex:none;font:inherit;font-size:13px;font-weight:500;color:var(--goldd);background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* detalhe do enquadramento */
+.detalhe{margin-top:10px;font-size:13px;line-height:1.55;color:var(--ink);background:var(--soft);border-radius:10px;padding:12px 13px}
+.detalhe p{margin:0}
+.detalhe p + p{margin-top:7px}
+.detalhe .etq{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--goldd)}
+.detalhe details{margin-top:7px}
+.detalhe summary{cursor:pointer;color:var(--navy);font-weight:500}
+.detalhe .lei{white-space:pre-line;margin-top:6px;font-size:12.5px;color:#3B455A;max-height:260px;overflow:auto}
+
+/* resultados */
+.vazio-res{margin-top:14px;padding:28px 18px;text-align:center;color:var(--muted);border:1px dashed var(--field);border-radius:12px;font-size:14.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
+.card{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:var(--soft)}
+.card .rot{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:500;line-height:1.4}
+.card .val{font-size:clamp(20px,2.3vw,25px);font-weight:600;color:var(--navy);margin-top:4px;font-variant-numeric:tabular-nums;line-height:1.25;overflow-wrap:anywhere}
+.card .de{font-size:13px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.aviso{margin-top:16px;border-left:3px solid var(--gold);background:#FBF7EF;padding:12px 15px;border-radius:0 10px 10px 0;font-size:14px;line-height:1.55}
+.aviso strong{color:var(--navy)}
+.aviso + .aviso{margin-top:10px}
+.bloco-tit{margin:26px 0 0;font-size:15px;font-weight:600;color:var(--navy)}
+.tabela-wrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:12px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 11px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;background:var(--soft)}
+th:first-child,td:first-child{text-align:left}
+tfoot td,tfoot th{font-weight:600;color:var(--navy);background:var(--soft);border-top:1px solid var(--line);border-bottom:0}
+td.forte{font-weight:600;color:var(--navy)}
+.comp td:first-child{white-space:normal;min-width:15em;max-width:30em}
+.comp tr.atual td{background:#FBF7EF}
+.comp .esc{font:inherit;font-size:12.5px;color:var(--goldd);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.nota{font-size:12.5px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.lista-cred{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.lista-cred li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5}
+.lista-cred i{flex:none;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:700;margin-top:1px}
+.lista-cred i.sim{background:#E4E9F2;color:var(--navy)}
+.lista-cred i.nao{background:#F6E4DF;color:#8E2F1F}
+.lista-cred i.info{background:#F1E9DA;color:var(--goldd)}
+.memoria{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:13.5px;line-height:1.55}
+.memoria li{padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.memoria .rfb{display:block;margin-top:5px;font-size:12px;color:var(--muted)}
+.fund{margin-top:10px;font-size:14px;line-height:1.6}
+.fund details{margin-top:6px}
+.fund summary{cursor:pointer;color:var(--navy);font-weight:500;font-size:13.5px}
+.fund .lei{white-space:pre-line;margin-top:6px;font-size:13px;color:#3B455A}
+.acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center}
+.botao{font:inherit;font-size:14px;font-weight:500;min-height:46px;padding:8px 18px;border-radius:9px;border:1px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.botao:hover{background:var(--soft)}
+.botao.prim{background:var(--navy);color:#fff}
+.botao.prim:hover{background:var(--navy2)}
+.botao[disabled]{opacity:.6;cursor:progress}
+.msg{font-size:13px;color:var(--goldd);min-height:1em}
+
+/* chamada comercial */
+.chamada{margin-top:22px;padding:clamp(18px,2.6vw,26px);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:14px;background:var(--navy);color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px}
+.chamada p{margin:0;max-width:34em;font-size:clamp(15px,1.7vw,17px);line-height:1.6;color:#EEF1F5}
+.chamada a{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 22px;border-radius:9px;background:var(--gold);color:var(--navy2);font-size:13.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.chamada a:hover{background:#C9A56C}
+.chamada svg{width:18px;height:18px;flex:none}
+
+/* metodologia */
+.metodo{padding-top:12px;padding-bottom:40px}
+.metodo details{border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:14px}
+.metodo summary{cursor:pointer;list-style:none;padding:16px clamp(16px,2.4vw,24px);font-weight:600;color:var(--navy);font-size:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.metodo summary::-webkit-details-marker{display:none}
+.metodo summary::after{content:"+";font-weight:400;font-size:22px;color:var(--goldd);line-height:1}
+.metodo details[open] summary::after{content:"–"}
+.metodo .corpo{padding:0 clamp(16px,2.4vw,24px) 20px;font-size:14.5px;line-height:1.65}
+.metodo .corpo p{margin:10px 0 0}
+.metodo ul{margin:10px 0 0;padding-left:20px}
+.metodo li{margin-top:6px}
+
+/* rodapé */
+.rodape{background:var(--navy2);color:#AEB7C4;font-size:13px;line-height:1.6}
+.rodape .wrap{padding-top:28px;padding-bottom:32px;display:grid;gap:10px}
+.rodape a{color:#fff}
+.rodape strong{color:#fff;font-weight:600}
+.rodape .links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.rodape .links a{display:inline-flex;align-items:center;min-height:32px;color:#AEB7C4}
+.preferencias-cookies{min-height:32px;padding:0;background:none;border:0;color:#AEB7C4;font:inherit;text-decoration:underline;cursor:pointer}
+.preferencias-cookies[hidden]{display:none}
+.carregando{color:var(--muted);font-size:13px}
+
+@media (max-width:360px){.duas{grid-template-columns:1fr}}
+@media (max-width:420px){.seg label{font-size:13px;padding:10px}}
+/* tabelas empilhadas no celular */
+@media (max-width:560px){
+  .resp thead{display:none}
+  .resp,.resp tbody,.resp tfoot{display:block;width:100%}
+  .resp tr{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;padding:11px 13px;border-bottom:1px solid var(--line)}
+  .resp tbody tr:last-child{border-bottom:0}
+  .resp tfoot tr{border-top:1px solid var(--line);border-bottom:0}
+  .resp th,.resp td{display:block;padding:0;border:0;text-align:left;white-space:normal;background:none}
+  .resp th[scope=row],.resp td.cab{grid-column:1/-1;font-size:14.5px}
+  .resp td[data-label]::before{content:attr(data-label);display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .resp td:empty{display:none}
+  .comp tr.atual{background:#FBF7EF}
+  .comp td:first-child{min-width:0;max-width:none}
+  .chamada a{width:100%;justify-content:center;white-space:normal;text-align:center;padding:12px 14px;letter-spacing:.03em;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap topo-in">
+    <a class="marca" href="https://scalambrini.com/" aria-label="Scalambrini e Saraiva Advogados — página inicial"><img src="/marca/logo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados" width="1010" height="401"></a>
+    <a class="selo" href="/reforma-tributaria/">Reforma Tributária</a>
+  </div>
+</header>
+
+<section class="hero" aria-labelledby="titulo">
+  <div class="wrap">
+    <p class="kicker">Calculadora · LC 214/2025</p>
+    <h1 id="titulo">Calculadora de IBS e CBS por produto e serviço</h1>
+    <p class="lead">Encontre o NCM ou a NBS, veja os enquadramentos previstos na LC 214/2025 e calcule a CBS e o IBS da operação, com reduções de alíquota, efeitos sobre créditos, fundamentação legal e memória de cálculo.</p>
+    <p class="atualizado" id="versao">Tabelas e regras de cálculo do código aberto da Calculadora de Tributos da Receita Federal (licença MIT). Ferramenta independente, sem vínculo com a Receita Federal.</p>
+  </div>
+</section>
+
+<main class="wrap grade">
+
+  <form id="form" class="painel" autocomplete="off" novalidate aria-labelledby="t-op">
+    <h2 class="tit" id="t-op">Sua operação</h2>
+
+    <fieldset style="border:0;margin:0;padding:0">
+      <legend class="sr">O que a empresa fornece</legend>
+      <div class="seg">
+        <div><input type="radio" name="tipo" id="tipo-ncm" value="ncm" checked><label for="tipo-ncm">Produto<small>Código NCM</small></label></div>
+        <div><input type="radio" name="tipo" id="tipo-nbs" value="nbs"><label for="tipo-nbs">Serviço<small>Código NBS</small></label></div>
+      </div>
+    </fieldset>
+
+    <div class="campo">
+      <label for="busca" id="rot-busca">Produto</label>
+      <div class="busca">
+        <input type="search" id="busca" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="lista" aria-describedby="dica-busca" placeholder="Código ou descrição, ex.: arroz ou 1006.30" enterkeyhint="search" spellcheck="false">
+        <ul class="lista" id="lista" role="listbox" aria-labelledby="rot-busca" hidden></ul>
+      </div>
+      <span class="dica" id="dica-busca">Digite pelo menos 3 letras ou os primeiros números do código.</span>
+      <div class="escolhido" id="escolhido" hidden>
+        <div><strong id="esc-cod"></strong> <span id="esc-desc"></span><span class="ctx" id="esc-ctx"></span></div>
+        <button type="button" class="link-bt" id="trocar">Trocar</button>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="enquadramento">Enquadramento tributário (cClassTrib)</label>
+      <select id="enquadramento" disabled><option>Escolha antes o produto ou o serviço</option></select>
+      <div class="detalhe" id="detalhe" hidden></div>
+    </div>
+
+    <div class="campo">
+      <label for="valor">Valor da operação</label>
+      <div class="entrada"><span class="un esq">R$</span><input class="com-esq" type="text" id="valor" inputmode="decimal" value="1.000,00" aria-describedby="dica-valor"></div>
+      <span class="dica" id="dica-valor">Base de cálculo: o valor cobrado, sem ICMS, ISS, IPI, PIS e Cofins, que não integram a base do IBS e da CBS.</span>
+    </div>
+
+    <div class="duas">
+      <div class="campo">
+        <label for="ano">Ano da operação</label>
+        <select id="ano"></select>
+      </div>
+      <div class="campo">
+        <label for="uf">Estado de destino</label>
+        <select id="uf"><option value="">Carregando…</option></select>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="municipio">Município de destino</label>
+      <select id="municipio"><option value="">Carregando…</option></select>
+    </div>
+
+    <div class="secao" id="sec-aliq" hidden>
+      <p class="secao-tit">Alíquotas de referência (simulação)</p>
+      <div class="duas">
+        <div class="campo">
+          <label for="cbsRef">CBS</label>
+          <div class="entrada"><input class="com-dir" type="text" id="cbsRef" inputmode="decimal"><span class="un dir">%</span></div>
+        </div>
+        <div class="campo">
+          <label for="ibsRef" id="rot-ibs">IBS (Estado + Município)</label>
+          <div class="entrada"><input class="com-dir" type="text" id="ibsRef" inputmode="decimal"><span class="un dir">%</span></div>
+        </div>
+      </div>
+      <p class="secao-dica" id="dica-aliq"></p>
+      <button type="button" class="link-bt" id="restaurar" style="margin-top:6px">Restaurar valores sugeridos</button>
+    </div>
+  </form>
+
+  <section class="painel" aria-labelledby="t-res" id="resultado">
+    <h2 class="tit" id="t-res">Resultado</h2>
+    <div class="vazio-res" id="vazio">Escolha o produto ou o serviço e o enquadramento para ver o cálculo.</div>
+
+    <div id="res" hidden>
+      <div class="cards" id="cards" aria-live="polite"></div>
+      <div id="avisos"></div>
+
+      <h3 class="bloco-tit">CBS e IBS da operação</h3>
+      <div class="tabela-wrap">
+        <table id="tab-trib" class="resp">
+          <thead><tr><th scope="col">Tributo</th><th scope="col">Alíquota</th><th scope="col">Redução</th><th scope="col">Alíquota efetiva</th><th scope="col">Valor</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <p class="nota" id="nota-base"></p>
+
+      <h3 class="bloco-tit">Efeitos sobre créditos</h3>
+      <ul class="lista-cred" id="creditos"></ul>
+      <p class="nota">Indicadores da tabela oficial de classificação tributária (cClassTrib). O aproveitamento efetivo depende do regime do adquirente e da regularidade da operação.</p>
+
+      <div id="bloco-comp">
+        <h3 class="bloco-tit">Comparativo de enquadramentos para este código</h3>
+        <div class="tabela-wrap">
+          <table class="comp resp" id="tab-comp">
+            <thead><tr><th scope="col">Enquadramento</th><th scope="col">Carga</th><th scope="col">CBS + IBS</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="nota">Enquadramentos em que o código consta dos anexos da LC 214/2025, comparados com a regra geral. Cada um depende das condições previstas na lei.</p>
+      </div>
+
+      <h3 class="bloco-tit">Fundamentação legal</h3>
+      <div class="fund" id="fund"></div>
+
+      <h3 class="bloco-tit">Memória de cálculo</h3>
+      <ul class="memoria" id="memoria"></ul>
+
+      <div class="acoes">
+        <button type="button" class="botao prim" id="b-pdf"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Baixar PDF da simulação</button>
+        <button type="button" class="botao" id="b-link">Copiar link</button>
+        <span class="msg" id="msg" role="status"></span>
+      </div>
+
+      <div class="chamada" id="chamada">
+        <p>Sua empresa já avaliou como a Reforma Tributária afetará seus preços, contratos e créditos fiscais? Solicite uma análise individualizada com nossa equipe.</p>
+        <a id="b-wpp" href="https://wa.me/5511964056680" target="_blank" rel="noopener" data-posicao="calculadora-ncm-nbs"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.24.68-1.41 1.3-1.95 1.35-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.53-.34.71-.34h.51c.16 0 .38-.06.6.46.24.55.79 1.89.86 2.03.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.89 1.04.93 1.92 1.21 2.19 1.35.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.6-.14.25.09 1.57.74 1.84.88.27.14.45.2.52.32.07.11.07.66-.17 1.33Z"/></svg>Solicitar análise tributária</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="wrap metodo" aria-label="Metodologia">
+  <details>
+    <summary>Como o cálculo é feito</summary>
+    <div class="corpo">
+      <ul>
+        <li><strong>Enquadramento:</strong> para o NCM ou a NBS escolhido, a calculadora lista os códigos de classificação tributária (cClassTrib) compatíveis, conferindo o código contra os anexos da LC 214/2025 com as mesmas regras de vínculo e exceção da Calculadora de Tributos da Receita Federal.</li>
+        <li><strong>Cálculo:</strong> CBS, IBS estadual e IBS municipal são calculados separadamente: base de cálculo × alíquota × (1 − percentual de redução). As fórmulas de cada tratamento tributário (redução de alíquota, redução de base, diferimento, isenção e imunidade) são as da tabela oficial.</li>
+        <li><strong>Arredondamento:</strong> 8 casas decimais nos cálculos intermediários e 2 casas nos valores finais, com arredondamento bancário, como no motor da Receita Federal.</li>
+        <li><strong>Base de cálculo:</strong> o IBS e a CBS são calculados “por fora”, sobre o valor da operação, que não inclui ICMS, ISS, IPI, PIS e Cofins.</li>
+        <li><strong>Conferência:</strong> o motor desta página reproduz os resultados dos casos de teste publicados pela Receita Federal no repositório oficial para os enquadramentos aqui disponíveis.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Alíquotas utilizadas</summary>
+    <div class="corpo">
+      <ul>
+        <li><strong>2026:</strong> alíquotas de teste das tabelas oficiais: CBS de 0,9%, IBS estadual de 0,1% e IBS municipal de zero. O valor é destacado, mas é compensável com PIS/Cofins ou dispensado para quem cumpre as obrigações acessórias (art. 348 da LC 214/2025).</li>
+        <li><strong>2027 e 2028:</strong> CBS pela alíquota de referência calculada pelo TCU para 2027 (11,3%), pendente de resolução do Senado, reduzida em 0,1 ponto percentual; IBS de 0,05% estadual e 0,05% municipal.</li>
+        <li><strong>2029 a 2033:</strong> CBS de 11,3% e IBS pela estimativa de mercado de 18,7% para a alíquota de referência, na proporção da transição (10% em 2029, 20% em 2030, 30% em 2031, 40% em 2032 e integral em 2033). A divisão entre Estado e Município ainda não foi fixada, por isso o IBS aparece somado.</li>
+        <li>Os valores sugeridos podem ser alterados. As alíquotas próprias de cada Estado e Município ainda não foram fixadas; até lá, aplica-se a referência.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>O que a calculadora não considera</summary>
+    <div class="corpo">
+      <ul>
+        <li>Imposto Seletivo, Simples Nacional e compras governamentais (redutor de alíquota).</li>
+        <li>Suspensão (CST 550), tributação monofásica de combustíveis (CST 620) e os códigos de ajuste e de documento específico (CST 800 a 830).</li>
+        <li>Alíquotas específicas ainda não publicadas nas tabelas oficiais, como as dos serviços financeiros e as alíquotas fixas de operações com imóveis a partir de 2027.</li>
+        <li>O valor de créditos presumidos, saldos credores, ressarcimentos e o recolhimento na liquidação financeira (split payment).</li>
+        <li>Requisitos de cada enquadramento que dependem de fatos da operação, como o destinatário, o registro do produto ou a habilitação em regime especial.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Fonte, licença e versão das tabelas</summary>
+    <div class="corpo">
+      <p id="fonte-txt">As tabelas (NCM, NBS, classificações tributárias, anexos da LC 214/2025, percentuais de redução, fundamentação legal e alíquotas) e as regras de cálculo vêm do código aberto da <a href="https://github.com/ReceitaFederal/calculadora-rtc-regime-regular" rel="noopener" target="_blank">Calculadora de Tributos da Receita Federal</a>, publicado sob a licença MIT.</p>
+      <p>Esta é uma ferramenta independente do escritório Scalambrini e Saraiva Advogados. Não é a calculadora oficial e não tem vínculo com a Receita Federal. <a href="licencas.html">Licenças e créditos</a>.</p>
+    </div>
+  </details>
+</section>
+
+<footer class="rodape">
+  <div class="wrap">
+    <span><strong>Scalambrini e Saraiva Advogados</strong> · São Paulo · Brasília · <a href="https://scalambrini.com/">scalambrini.com</a></span>
+    <span>Simulação de caráter informativo, construída sobre as tabelas públicas da Receita Federal e sobre alíquotas de referência ainda não definitivas a partir de 2027. Não constitui parecer nem substitui a análise das operações e da legislação aplicável a cada caso.</span>
+    <span class="links"><a href="/calculadora/">Simulador da transição 2026–2033</a><a href="/reforma-tributaria/">Reforma Tributária</a><a href="licencas.html">Licenças e créditos</a><a href="/privacidade.html">Política de Privacidade</a><button type="button" class="preferencias-cookies" data-preferencias-cookies hidden>Preferências de cookies</button></span>
+  </div>
+</footer>
+
+<noscript><p class="wrap">Ative o JavaScript para usar a calculadora.</p></noscript>
+
+<script src="/assets/vendor/decimal-10.6.0.min.js"></script>
+<script src="motor.js?v=20261116"></script>
+<script src="app.js?v=20261116"></script>
+<script src="/assets/js/medicao.js?v=20261109" defer></script>
+</body>
+</html>

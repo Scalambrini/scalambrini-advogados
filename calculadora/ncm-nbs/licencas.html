@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Licenças e créditos — Calculadora de IBS e CBS · Scalambrini e Saraiva Advogados</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#131A2C">
+<link rel="icon" href="/favicon.ico?v=20261103" sizes="any">
+<link rel="icon" href="/favicon.svg?v=20261103" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<style>
+:root{--navy:#131A2C;--navy2:#0D1322;--gold:#B89359;--goldd:#8A6A33;--ink:#1F2328;--muted:#5A6270;--line:#E3E6EA;--soft:#F5F6F8}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:15.5px/1.65 'Poppins','Helvetica Neue',Arial,sans-serif;background:#fff}
+a{color:var(--navy)}
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.topo{border-bottom:1px solid var(--line)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:12px}
+.topo img{display:block;width:clamp(128px,14vw,160px);height:auto}
+.topo a.volta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--goldd);font-weight:600;text-decoration:none}
+h1{margin:36px 0 8px;font-size:clamp(26px,3.6vw,36px);line-height:1.2;color:var(--navy);font-weight:600;letter-spacing:-.01em}
+h2{margin:34px 0 6px;font-size:18px;color:var(--navy);font-weight:600}
+p{margin:8px 0 0}
+pre{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0 0;color:#3B455A}
+.nota{color:var(--muted);font-size:14px}
+footer{margin-top:48px;background:var(--navy2);color:#AEB7C4;font-size:13px}
+footer .wrap{padding-top:24px;padding-bottom:28px}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+<header class="topo"><div class="wrap"><a href="/"><img src="/marca/logo.svg?v=20261103" alt="Scalambrini e Saraiva Advogados" width="1010" height="401"></a><a class="volta" href="./">Voltar à calculadora</a></div></header>
+<main class="wrap">
+<h1>Licenças e créditos</h1>
+<p>A <a href="./">Calculadora de IBS e CBS por NCM e NBS</a> é uma ferramenta independente do escritório Scalambrini e Saraiva Advogados. Ela reúne o trabalho de terceiros publicado sob a licença MIT, cujos avisos de direitos autorais e de permissão estão reproduzidos abaixo.</p>
+<p class="nota">A calculadora não é a ferramenta oficial da Receita Federal e não tem vínculo com ela. O uso do código aberto não implica endosso da Receita Federal aos resultados desta página.</p>
+
+<h2>Calculadora de Tributos — Receita Federal do Brasil</h2>
+<p>Tabelas (NCM, NBS, classificações tributárias, anexos da LC 214/2025, percentuais de redução, fundamentação legal e alíquotas) e regras de cálculo de CBS e IBS, adaptadas para execução no navegador nos arquivos <code>motor.js</code> e <code>dados/*.json</code>. Repositório: <a href="https://github.com/ReceitaFederal/calculadora-rtc-regime-regular" rel="noopener" target="_blank">github.com/ReceitaFederal/calculadora-rtc-regime-regular</a>.</p>
+<pre>MIT License
+
+Copyright (c) 2026 Receita Federal do Brasil
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+
+<h2>decimal.js 10.6.0</h2>
+<p>Aritmética decimal de precisão arbitrária, usada para reproduzir o arredondamento do motor original. <a href="https://github.com/MikeMcl/decimal.js" rel="noopener" target="_blank">github.com/MikeMcl/decimal.js</a>.</p>
+<pre>The MIT Licence.
+
+Copyright (c) 2025 Michael Mclaughlin
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</pre>
+
+<h2>jsPDF 4.2.1</h2>
+<p>Geração do relatório em PDF no próprio navegador. <a href="https://github.com/parallax/jsPDF" rel="noopener" target="_blank">github.com/parallax/jsPDF</a>.</p>
+<pre>Copyright
+(c) 2010-2025 James Hall, https://github.com/MrRio/jsPDF
+(c) 2015-2025 yWorks GmbH, https://www.yworks.com/
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</pre>
+</main>
+<footer><div class="wrap"><strong style="color:#fff">Scalambrini e Saraiva Advogados</strong> · São Paulo · Brasília · <a href="https://scalambrini.com/">scalambrini.com</a></div></footer>
+</body>
+</html>
