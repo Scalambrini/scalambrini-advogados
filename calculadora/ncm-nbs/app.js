@@ -47,7 +47,7 @@
   }
   function esc(s) { return String(s === null || s === undefined ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
-  function limparDesc(s) { return String(s || '').replace(/<[^>]+>/g, '').replace(/^[\s\-–—]+/, '').replace(/[:;]\s*$/, '').trim(); }
+  function limparDesc(s) { return String(s || '').replace(/<[^>]+>/g, '').replace(/^[\s\-–—]+/, '').replace(/[:;.]\s*$/, '').trim(); }
   function trunc(s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : s; }
   function codigoFmt(tipo, cd) {
     if (tipo === 'ncm') return cd.length === 8 ? cd.slice(0, 4) + '.' + cd.slice(4, 6) + '.' + cd.slice(6) : cd;
@@ -90,11 +90,15 @@
         if (p) pais.push(limparDesc(p));
       }
       var propria = limparDesc(l[1]);
-      var generica = /^(outr[oa]s?|demais)\b/i.test(propria) || propria.length < 14;
       var pai = pais.length ? pais[pais.length - 1] : '';
-      var titulo = generica && pai ? propria + ' — ' + pai : propria;
-      var ctx = tipo === 'ncm' ? (mapa[cd.slice(0, 4)] ? limparDesc(mapa[cd.slice(0, 4)]) : '') : (pais[0] || '');
-      folhas.push({ cd: cd, titulo: titulo, ctx: ctx, n: norm(propria), np: norm(pais.join(' ')) });
+      // Descrições que só fazem sentido com o nível de cima ("Outros", "Não descafeinado"…) levam o nível de cima
+      // no título (sem subir até o capítulo)
+      var paiTit = '';
+      for (var q = cd.length - 1; q >= (tipo === 'ncm' ? 4 : 5); q--) { if (mapa[cd.slice(0, q)]) { paiTit = limparDesc(mapa[cd.slice(0, q)]); break; } }
+      var generica = /^(outr[oa]s?|demais|n[aã]o |com |sem |de |em |para )/i.test(propria) || propria.length < 30;
+      var titulo = generica && paiTit ? propria + ' — ' + paiTit : propria;
+      var ctx = tipo === 'ncm' ? (mapa[cd.slice(0, 4)] ? limparDesc(mapa[cd.slice(0, 4)]) : '') : (mapa[cd.slice(0, 3)] ? limparDesc(mapa[cd.slice(0, 3)]) : (pais[0] || ''));
+      folhas.push({ cd: cd, titulo: titulo, ctx: ctx, n: norm(propria + ' ' + pai), np: norm(pais.slice(0, -1).join(' ')) });
     });
     return folhas;
   }
@@ -122,20 +126,30 @@
     }
     var termos = norm(q).split(/\s+/).filter(function (t) { return t.length >= 2; });
     if (!termos.length || norm(q).replace(/\s/g, '').length < 3) return [];
+    var regs = termos.map(function (t) {
+      var x = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      // raiz simples para plurais ("mineral" → "minerais", "cerveja" → "cervejas")
+      var raiz = t.length >= 6 ? t.slice(0, t.length - (t.length >= 8 ? 2 : 1)) : t.replace(/s$/, '');
+      var xr = raiz.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return { t: t, raiz: raiz, ini: new RegExp('(^|[^a-z0-9])' + x), iniR: new RegExp('(^|[^a-z0-9])' + xr),
+        palavra: new RegExp('(^|[^a-z0-9])' + x + '(s|es)?($|[^a-z0-9])') };
+    });
     var out = [];
     for (var k = 0; k < l.length; k++) {
       var e = l[k], sc = 0, ok = true;
       for (var j = 0; j < termos.length; j++) {
-        var t = termos[j], ini = new RegExp('(^|[^a-z0-9])' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-        if (ini.test(e.n)) sc += 4;
-        else if (e.n.indexOf(t) >= 0) sc += 2;
-        else if (ini.test(e.np)) sc += 1;
-        else if (e.np.indexOf(t) >= 0) sc += 0.5;
+        var r = regs[j];
+        if (r.palavra.test(e.n)) sc += 5;
+        else if (r.ini.test(e.n)) sc += 4;
+        else if (r.iniR.test(e.n)) sc += 3;
+        else if (e.n.indexOf(r.raiz) >= 0) sc += 2;
+        else if (r.iniR.test(e.np)) sc += 1;
+        else if (e.np.indexOf(r.raiz) >= 0) sc += 0.5;
         else { ok = false; break; }
       }
       if (ok) out.push([sc, e]);
     }
-    out.sort(function (a, b) { return b[0] - a[0] || (a[1].cd < b[1].cd ? -1 : 1); });
+    out.sort(function (a, b) { return b[0] - a[0] || a[1].n.length - b[1].n.length || (a[1].cd < b[1].cd ? -1 : 1); });
     return out.slice(0, 50).map(function (x) { return x[1]; });
   }
 
@@ -164,7 +178,7 @@
     resultadosBusca = pesquisar(q);
     ativo = -1;
     if (!resultadosBusca.length) {
-      abrirLista('<li class="vazio" role="option" aria-disabled="true">Nenhum código encontrado. Tente outra palavra ou os primeiros números do código.</li>');
+      abrirLista('<li class="vazio" role="option" aria-disabled="true">Nenhum código encontrado. Tente um termo da tabela oficial ou os números do código, que constam da nota fiscal.</li>');
       return;
     }
     abrirLista(resultadosBusca.map(function (e, i) {
