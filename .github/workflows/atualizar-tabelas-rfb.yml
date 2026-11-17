@@ -1,0 +1,78 @@
+# Verifica toda segunda-feira se a Receita Federal publicou nova versão da Calculadora de Tributos
+# (github.com/ReceitaFederal/calculadora-rtc-regime-regular). Havendo versão nova, gera as tabelas da
+# Calculadora por NCM e NBS, confere o motor com os casos de teste da Receita e abre um pull request.
+# Nada vai ao ar sem aprovação: o site só muda quando o pull request é aceito.
+name: Atualizar tabelas da Receita Federal
+
+on:
+  schedule:
+    - cron: '23 10 * * 1'   # segundas-feiras, 7h23 em Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Baixar o repositório da Receita Federal
+        run: |
+          git clone --depth 1 https://github.com/ReceitaFederal/calculadora-rtc-regime-regular "$RUNNER_TEMP/rfb"
+          echo "SHA=$(git -C "$RUNNER_TEMP/rfb" rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Verificar se há versão nova
+        id: versao
+        run: |
+          atual=$(python3 -c "import json; print(json.load(open('calculadora/ncm-nbs/dados/base.json'))['meta']['commit'])")
+          ramo="tabelas-rfb-${SHA:0:7}"
+          echo "ramo=$ramo" >> "$GITHUB_OUTPUT"
+          if [ "$atual" = "$SHA" ]; then
+            echo "Tabelas já atualizadas (commit ${SHA:0:7})."; echo "nova=nao" >> "$GITHUB_OUTPUT"
+          elif git ls-remote --exit-code --heads origin "$ramo" > /dev/null; then
+            echo "Atualização já proposta no ramo $ramo."; echo "nova=nao" >> "$GITHUB_OUTPUT"
+          else
+            echo "nova=sim" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Gerar as tabelas
+        if: steps.versao.outputs.nova == 'sim'
+        run: python3 -I .github/rfb/gerar_dados.py --rfb "$RUNNER_TEMP/rfb" --saida calculadora/ncm-nbs/dados --commit "$SHA"
+
+      - name: Conferir o motor com os testes da Receita
+        if: steps.versao.outputs.nova == 'sim'
+        run: |
+          npm install --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/npm" decimal.js@10.6.0
+          NODE_PATH="$RUNNER_TEMP/npm/node_modules" node .github/rfb/conferir_motor.js "$RUNNER_TEMP/rfb" | tee "$RUNNER_TEMP/conferencia.txt"
+
+      - name: Abrir pull request
+        if: steps.versao.outputs.nova == 'sim'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RAMO: ${{ steps.versao.outputs.ramo }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$RAMO"
+          git add calculadora/ncm-nbs/dados
+          git commit -m "Atualiza as tabelas da calculadora NCM/NBS (Receita Federal ${SHA:0:7})"
+          git push origin "$RAMO"
+          {
+            echo "A Receita Federal publicou nova versão da Calculadora de Tributos (commit [${SHA:0:7}](https://github.com/ReceitaFederal/calculadora-rtc-regime-regular/commit/$SHA))."
+            echo
+            echo "Este pull request atualiza as tabelas da Calculadora por NCM e NBS. Conferência do motor com os casos de teste da Receita:"
+            echo
+            echo '```'
+            cat "$RUNNER_TEMP/conferencia.txt"
+            echo '```'
+            echo
+            echo "Ao aceitar este pull request, as tabelas novas vão ao ar em scalambrini.com/calculadora/ncm-nbs/."
+          } > "$RUNNER_TEMP/corpo.md"
+          gh pr create --base main --head "$RAMO" --title "Tabelas da Receita Federal: versão ${SHA:0:7}" --body-file "$RUNNER_TEMP/corpo.md"
